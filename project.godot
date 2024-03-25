@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="wizard-ballz"
+run/main_scene="res://MatchScene.tscn"
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+DelayDrawer="*res://world/DelayDrawer.cs"
+
+[dotnet]
+
+project/assembly_name="wizard-ballz"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/scene-tree-sorter/plugin.cfg")
+
+[layer_names]
+
+3d_physics/layer_1="default"
+3d_physics/layer_2="field"
+3d_physics/layer_3="wall"
+3d_physics/layer_4="projectile"

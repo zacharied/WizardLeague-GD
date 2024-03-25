@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://du7r01s6hf65m"]
+
+[ext_resource type="PackedScene" uid="uid://bgv0qwgjgjtm" path="res://assets/ext/kaykit/tileSlopeLowMedium_forest.gltf.glb" id="1_bomad"]
+
+[node name="tileSlopeLowMediumCorner_forest" type="Node3D"]
+
+[node name="tileSlopeLowMedium_forest_gltf18" parent="." instance=ExtResource("1_bomad")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0)
+
+[node name="tileSlopeLowMedium_forest_gltf21" parent="." instance=ExtResource("1_bomad")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

@@ -1,0 +1,444 @@
+[gd_scene load_steps=15 format=3 uid="uid://b8g4p0nvbrhxt"]
+
+[ext_resource type="PackedScene" uid="uid://cjly1san0le6e" path="res://assets/ext/kaykit/tileHigh_forest.gltf.glb" id="1_suxms"]
+[ext_resource type="Script" path="res://GameField.cs" id="1_y6ktl"]
+[ext_resource type="PackedScene" uid="uid://bhrh2dxljxb4x" path="res://assets/ext/kaykit/tileSlopeMediumHigh_forest.gltf.glb" id="2_3qfla"]
+[ext_resource type="PackedScene" uid="uid://du7r01s6hf65m" path="res://assets/ext/kaykit/tileSlopeLowMediumCorner_forest.tscn" id="3_r1thi"]
+[ext_resource type="PackedScene" uid="uid://cvck7knt2j2t" path="res://assets/ext/kaykit/tileSlopeLowHighCorner_forest.tscn" id="5_6uu11"]
+[ext_resource type="PackedScene" uid="uid://dfyx8ho0a8fqq" path="res://assets/ext/kaykit/tileRamp6x2flat3_forest.tscn" id="6_bcmjf"]
+[ext_resource type="PackedScene" uid="uid://bgdgquooe5qx6" path="res://assets/ext/kaykit/tileSlopeLowHigh_forest.gltf.glb" id="6_d600a"]
+[ext_resource type="PackedScene" uid="uid://dou114d7agssi" path="res://assets/ext/kaykit/tileCompWallAngle_forest.tscn" id="7_fa0r7"]
+[ext_resource type="PackedScene" uid="uid://bb2uyb11t1mnv" path="res://assets/ext/kaykit/gateLargeWide_teamRed.gltf.glb" id="8_i3hlx"]
+[ext_resource type="PackedScene" uid="uid://bp3wyrhokska0" path="res://assets/ext/kaykit/gateLargeWide_teamBlue.gltf.glb" id="9_8bsoi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0py27"]
+size = Vector3(2, 12, 24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wu7ov"]
+size = Vector3(2, 12, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v8von"]
+size = Vector3(2, 4, 12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qrpdw"]
+size = Vector3(8, 6, 6)
+
+[node name="GameField" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+script = ExtResource("1_y6ktl")
+
+[node name="GATES" type="Node3D" parent="." groups=["generate_static_bodies"]]
+
+[node name="gateLargeWide_teamBlue_gltf" parent="GATES" groups=["generate_static_bodies_ignore"] instance=ExtResource("9_8bsoi")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3, 15)
+
+[node name="gateLargeWide_teamRed_gltf" parent="GATES" groups=["generate_static_bodies_ignore"] instance=ExtResource("8_i3hlx")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3, -13)
+
+[node name="tileCompWallAngle_forest" parent="GATES" instance=ExtResource("7_fa0r7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3, -13)
+
+[node name="tileCompWallAngle_forest2" parent="GATES" instance=ExtResource("7_fa0r7")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 3, 15)
+
+[node name="TILES" type="Node3D" parent="." groups=["generate_static_bodies"]]
+
+[node name="tileHigh_forest_gltf" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="tileHigh_forest_gltf10" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 6)
+
+[node name="tileHigh_forest_gltf11" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
+
+[node name="tileHigh_forest_gltf12" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
+
+[node name="tileHigh_forest_gltf13" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="tileHigh_forest_gltf14" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+
+[node name="tileHigh_forest_gltf15" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="tileHigh_forest_gltf16" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
+
+[node name="tileHigh_forest_gltf17" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4)
+
+[node name="tileHigh_forest_gltf18" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
+
+[node name="tileHigh_forest_gltf19" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -4)
+
+[node name="tileHigh_forest_gltf2" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+
+[node name="tileHigh_forest_gltf20" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+
+[node name="tileHigh_forest_gltf21" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+
+[node name="tileHigh_forest_gltf22" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 6)
+
+[node name="tileHigh_forest_gltf23" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+
+[node name="tileHigh_forest_gltf24" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 6)
+
+[node name="tileHigh_forest_gltf25" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="tileHigh_forest_gltf26" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 2)
+
+[node name="tileHigh_forest_gltf27" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="tileHigh_forest_gltf28" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
+
+[node name="tileHigh_forest_gltf29" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
+
+[node name="tileHigh_forest_gltf3" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="tileHigh_forest_gltf30" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
+
+[node name="tileHigh_forest_gltf31" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4)
+
+[node name="tileHigh_forest_gltf32" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+
+[node name="tileHigh_forest_gltf33" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 4)
+
+[node name="tileHigh_forest_gltf34" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 6)
+
+[node name="tileHigh_forest_gltf35" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4)
+
+[node name="tileHigh_forest_gltf36" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 6)
+
+[node name="tileHigh_forest_gltf37" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -6)
+
+[node name="tileHigh_forest_gltf38" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -6)
+
+[node name="tileHigh_forest_gltf39" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -6)
+
+[node name="tileHigh_forest_gltf4" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+
+[node name="tileHigh_forest_gltf40" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -6)
+
+[node name="tileHigh_forest_gltf41" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -6)
+
+[node name="tileHigh_forest_gltf42" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -6)
+
+[node name="tileHigh_forest_gltf43" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 8)
+
+[node name="tileHigh_forest_gltf44" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 8)
+
+[node name="tileHigh_forest_gltf45" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 8)
+
+[node name="tileHigh_forest_gltf46" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 8)
+
+[node name="tileHigh_forest_gltf47" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 8)
+
+[node name="tileHigh_forest_gltf48" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 8)
+
+[node name="tileHigh_forest_gltf5" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
+
+[node name="tileHigh_forest_gltf6" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+
+[node name="tileHigh_forest_gltf7" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+
+[node name="tileHigh_forest_gltf8" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+
+[node name="tileHigh_forest_gltf9" parent="TILES" instance=ExtResource("1_suxms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
+
+[node name="tileRamp4x2flat3_forest3" parent="TILES" instance=ExtResource("6_bcmjf")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, 14)
+
+[node name="tileRamp4x2flat3_forest4" parent="TILES" instance=ExtResource("6_bcmjf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -12)
+
+[node name="tileSlopeLowHigh_forest_gltf" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9, 1.5, 8)
+
+[node name="tileSlopeLowHigh_forest_gltf10" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9, 1.5, 2)
+
+[node name="tileSlopeLowHigh_forest_gltf11" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9, 1.5, -4)
+
+[node name="tileSlopeLowHigh_forest_gltf12" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9, 1.5, -2)
+
+[node name="tileSlopeLowHigh_forest_gltf13" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9, 1.5, -8)
+
+[node name="tileSlopeLowHigh_forest_gltf14" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9, 1.5, -6)
+
+[node name="tileSlopeLowHigh_forest_gltf15" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 1.5, -10)
+
+[node name="tileSlopeLowHigh_forest_gltf16" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 1.5, -10)
+
+[node name="tileSlopeLowHigh_forest_gltf17" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 1.5, -10)
+
+[node name="tileSlopeLowHigh_forest_gltf18" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 1.5, -10)
+
+[node name="tileSlopeLowHigh_forest_gltf19" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, -6)
+
+[node name="tileSlopeLowHigh_forest_gltf2" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9, 1.5, 10)
+
+[node name="tileSlopeLowHigh_forest_gltf20" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, -8)
+
+[node name="tileSlopeLowHigh_forest_gltf21" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, -2)
+
+[node name="tileSlopeLowHigh_forest_gltf22" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, -4)
+
+[node name="tileSlopeLowHigh_forest_gltf23" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, 2)
+
+[node name="tileSlopeLowHigh_forest_gltf24" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, 0)
+
+[node name="tileSlopeLowHigh_forest_gltf25" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, 6)
+
+[node name="tileSlopeLowHigh_forest_gltf26" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, 4)
+
+[node name="tileSlopeLowHigh_forest_gltf27" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, 10)
+
+[node name="tileSlopeLowHigh_forest_gltf28" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, 8)
+
+[node name="tileSlopeLowHigh_forest_gltf3" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 7, 1.5, 12)
+
+[node name="tileSlopeLowHigh_forest_gltf6" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7, 1.5, 12)
+
+[node name="tileSlopeLowHigh_forest_gltf7" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9, 1.5, 4)
+
+[node name="tileSlopeLowHigh_forest_gltf8" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9, 1.5, 6)
+
+[node name="tileSlopeLowHigh_forest_gltf9" parent="TILES" instance=ExtResource("6_d600a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9, 1.5, 0)
+
+[node name="tileSlopeLowHighCorner_forest" parent="TILES" instance=ExtResource("5_6uu11")]
+transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, 9, 1.5, 12)
+
+[node name="tileSlopeLowHighCorner_forest2" parent="TILES" instance=ExtResource("5_6uu11")]
+transform = Transform3D(1.03316e-07, 0, 1, 0, 1, 0, -1, 0, 1.03316e-07, -9, 1.5, 12)
+
+[node name="tileSlopeLowHighCorner_forest3" parent="TILES" instance=ExtResource("5_6uu11")]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, -9, 1.5, -10)
+
+[node name="tileSlopeLowHighCorner_forest4" parent="TILES" instance=ExtResource("5_6uu11")]
+transform = Transform3D(-1.03316e-07, 0, -1, 0, 1, 0, 1, 0, -1.03316e-07, 9, 1.5, -10)
+
+[node name="tileSlopeLowMediumCorner_forest" parent="TILES" instance=ExtResource("3_r1thi")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7, 1, 10)
+
+[node name="tileSlopeLowMediumCorner_forest2" parent="TILES" instance=ExtResource("3_r1thi")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 7, 1, 10)
+
+[node name="tileSlopeLowMediumCorner_forest3" parent="TILES" instance=ExtResource("3_r1thi")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 7, 1, -8)
+
+[node name="tileSlopeLowMediumCorner_forest4" parent="TILES" instance=ExtResource("3_r1thi")]
+transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -7, 1, -8)
+
+[node name="tileSlopeMediumHigh_forest_gltf" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, -6)
+
+[node name="tileSlopeMediumHigh_forest_gltf10" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.5, -6)
+
+[node name="tileSlopeMediumHigh_forest_gltf11" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, 4)
+
+[node name="tileSlopeMediumHigh_forest_gltf12" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, 6)
+
+[node name="tileSlopeMediumHigh_forest_gltf13" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, 8)
+
+[node name="tileSlopeMediumHigh_forest_gltf14" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.5, 8)
+
+[node name="tileSlopeMediumHigh_forest_gltf15" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.5, 6)
+
+[node name="tileSlopeMediumHigh_forest_gltf16" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.5, 4)
+
+[node name="tileSlopeMediumHigh_forest_gltf17" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 0.5, 10)
+
+[node name="tileSlopeMediumHigh_forest_gltf18" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5, 0.5, 10)
+
+[node name="tileSlopeMediumHigh_forest_gltf19" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -5, 0.5, -8)
+
+[node name="tileSlopeMediumHigh_forest_gltf2" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, -4)
+
+[node name="tileSlopeMediumHigh_forest_gltf20" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 5, 0.5, -8)
+
+[node name="tileSlopeMediumHigh_forest_gltf3" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, -2)
+
+[node name="tileSlopeMediumHigh_forest_gltf4" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, 0)
+
+[node name="tileSlopeMediumHigh_forest_gltf5" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, 2)
+
+[node name="tileSlopeMediumHigh_forest_gltf6" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.5, 2)
+
+[node name="tileSlopeMediumHigh_forest_gltf7" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.5, 0)
+
+[node name="tileSlopeMediumHigh_forest_gltf8" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.5, -2)
+
+[node name="tileSlopeMediumHigh_forest_gltf9" parent="TILES" instance=ExtResource("2_3qfla")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.5, -4)
+
+[node name="WALLS" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WALLS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9691, -1.90735e-06, -0.0494595)
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WALLS/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 1)
+shape = SubResource("BoxShape3D_0py27")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="WALLS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0309, 7, 0.950541)
+collision_layer = 4
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WALLS/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_0py27")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="WALLS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.96909, 7, 13.9505)
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WALLS/StaticBody3D3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 1, 0)
+shape = SubResource("BoxShape3D_wu7ov")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="WALLS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.03091, 7, 13.9505)
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WALLS/StaticBody3D4"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 1, 0)
+shape = SubResource("BoxShape3D_wu7ov")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="WALLS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.03091, 7, -12.0495)
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WALLS/StaticBody3D5"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 1, 0)
+shape = SubResource("BoxShape3D_wu7ov")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="WALLS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.96909, 7, -12.0495)
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WALLS/StaticBody3D6"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 1, 0)
+shape = SubResource("BoxShape3D_wu7ov")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="WALLS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0309086, 10, -12.0495)
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WALLS/StaticBody3D7"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2, 0)
+shape = SubResource("BoxShape3D_v8von")
+
+[node name="StaticBody3D8" type="StaticBody3D" parent="WALLS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0309086, 10, 13.9505)
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WALLS/StaticBody3D8"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2, 0)
+shape = SubResource("BoxShape3D_v8von")
+
+[node name="GAME" type="Node3D" parent="."]
+
+[node name="SpellSpawn1" type="Marker3D" parent="GAME"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 9)
+gizmo_extents = 2.8
+
+[node name="SpellSpawn2" type="Marker3D" parent="GAME"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -7)
+gizmo_extents = 3.17
+
+[node name="GoalZone1" type="Area3D" parent="GAME"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 18)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GAME/GoalZone1"]
+shape = SubResource("BoxShape3D_qrpdw")
+
+[node name="GoalZone2" type="Area3D" parent="GAME"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -16)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GAME/GoalZone2"]
+shape = SubResource("BoxShape3D_qrpdw")

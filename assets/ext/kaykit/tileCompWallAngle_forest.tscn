@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://dou114d7agssi"]
+
+[ext_resource type="PackedScene" uid="uid://cjly1san0le6e" path="res://assets/ext/kaykit/tileHigh_forest.gltf.glb" id="1_jwh6y"]
+[ext_resource type="PackedScene" uid="uid://bh2aga8kt3kyy" path="res://assets/ext/kaykit/tileLow_forest.gltf.glb" id="2_pa6we"]
+[ext_resource type="PackedScene" uid="uid://b0f6su8uma2n6" path="res://assets/ext/kaykit/kaykit-tileHighForestCorner.glb" id="3_wd2gv"]
+
+[node name="tileCompWallAngle_forest" type="Node3D"]
+
+[node name="tileHigh_forest_gltf73" parent="." instance=ExtResource("1_jwh6y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
+
+[node name="tileHigh_forest_gltf74" parent="." instance=ExtResource("1_jwh6y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 5)
+
+[node name="tileHigh_forest_gltf75" parent="." instance=ExtResource("1_jwh6y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
+
+[node name="tileHigh_forest_gltf76" parent="." instance=ExtResource("1_jwh6y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, -5)
+
+[node name="tileLow_forest_gltf" parent="." instance=ExtResource("2_pa6we")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, 5)
+
+[node name="tileLow_forest_gltf2" parent="." instance=ExtResource("2_pa6we")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, 1)
+
+[node name="tileLow_forest_gltf5" parent="." instance=ExtResource("2_pa6we")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, 3)
+
+[node name="tileLow_forest_gltf3" parent="." instance=ExtResource("2_pa6we")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, -1)
+
+[node name="tileLow_forest_gltf6" parent="." instance=ExtResource("2_pa6we")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, -3)
+
+[node name="tileLow_forest_gltf7" parent="." instance=ExtResource("2_pa6we")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, -3)
+
+[node name="tileLow_forest_gltf4" parent="." instance=ExtResource("2_pa6we")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, -5)
+
+[node name="kaykit-tileHighForestCorner" parent="." instance=ExtResource("3_wd2gv")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, -5)
+
+[node name="kaykit-tileHighForestCorner2" parent="." instance=ExtResource("3_wd2gv")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 2, -5)
+
+[node name="kaykit-tileHighForestCorner3" parent="." instance=ExtResource("3_wd2gv")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1, 0, 5)
+
+[node name="kaykit-tileHighForestCorner4" parent="." instance=ExtResource("3_wd2gv")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1, 2, 5)
+
+[node name="tileHigh_forest_gltf77" parent="." instance=ExtResource("1_jwh6y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4, 5)
+
+[node name="tileHigh_forest_gltf78" parent="." instance=ExtResource("1_jwh6y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4, -5)
+
+[node name="kaykit-tileHighForestCorner5" parent="." instance=ExtResource("3_wd2gv")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 4, -5)
+
+[node name="kaykit-tileHighForestCorner6" parent="." instance=ExtResource("3_wd2gv")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1, 4, 5)

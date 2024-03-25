@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvck7knt2j2t"]
+
+[ext_resource type="PackedScene" uid="uid://bgdgquooe5qx6" path="res://assets/ext/kaykit/tileSlopeLowHigh_forest.gltf.glb" id="1_jg6iu"]
+
+[node name="tileSlopeLowHighCorner_forest" type="Node3D"]
+
+[node name="tileSlopeLowHigh_forest_gltf6" parent="." instance=ExtResource("1_jg6iu")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="tileSlopeLowHigh_forest_gltf16" parent="." instance=ExtResource("1_jg6iu")]

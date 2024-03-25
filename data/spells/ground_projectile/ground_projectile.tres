@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SpellRecord" load_steps=3 format=3 uid="uid://bul6w5s4rqfaa"]
+
+[ext_resource type="Resource" uid="uid://bdhvdc3sqybbw" path="res://data/spells/ground_projectile/effect.tres" id="1_3qprh"]
+[ext_resource type="Script" path="res://world/SpellRecord.cs" id="1_o87tm"]
+
+[resource]
+script = ExtResource("1_o87tm")
+Name = "Ground Projectile"
+Cost = 0
+ChargeDuration = 0.5
+Effect = ExtResource("1_3qprh")

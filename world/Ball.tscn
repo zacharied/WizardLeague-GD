@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://p7c7asujcb0w"]
+
+[ext_resource type="PackedScene" uid="uid://bcybhu1k80vyu" path="res://assets/ext/kaykit/ball.gltf.glb" id="1_eyjur"]
+[ext_resource type="Script" path="res://world/Ball.cs" id="1_yhss5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kmitc"]
+friction = 0.06
+bounce = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ul03u"]
+radius = 1.0
+
+[node name="Ball" type="RigidBody3D"]
+collision_mask = 15
+physics_material_override = SubResource("PhysicsMaterial_kmitc")
+script = ExtResource("1_yhss5")
+
+[node name="Visual" parent="." instance=ExtResource("1_eyjur")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ul03u")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_ul03u")
