@@ -9,6 +9,7 @@ public partial class GameField : Node3D
 {
 	public Node3D[] SpellCastSpawns = new Node3D[WizardBallz.PlayerCount];
 	public Area3D[] GoalZones = new Area3D[WizardBallz.PlayerCount];
+	public Vector3[] TurretPositions = new Vector3[WizardBallz.PlayerCount];
 	
 	public override void _Ready()
 	{
@@ -17,6 +18,9 @@ public partial class GameField : Node3D
 		for (var i = 0; i < SpellCastSpawns.Length; i++) {
 			SpellCastSpawns[i] = GetNode<Node3D>($"GAME/SpellSpawn{i + 1}");
 			GoalZones[i] = GetNode<Area3D>($"GAME/GoalZone{i + 1}");
+			var gate = GetNode<Node3D>($"GATES/Gate{i + 1}");
+			var aabb = gate.GetChildrenOfType<MeshInstance3D>().Single().GetAabb().Size * gate.Scale;
+			TurretPositions[i] = gate.GlobalPosition with { Y = gate.GlobalPosition.Y + aabb.Y };
 		}
 	}
 
@@ -55,6 +59,8 @@ public partial class GameField : Node3D
 				}
 			}
 		}
+		
+		stopwatch.Stop();
 		
 		GD.Print($"Generated {bodyCount} static bodies ({shapes.Count} unique meshes) in {stopwatch.ElapsedMilliseconds}ms");
 	}

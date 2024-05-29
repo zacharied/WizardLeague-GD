@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="SpellRecord" load_steps=6 format=3 uid="uid://c7vlpva3tfipn"]
+
+[ext_resource type="PackedScene" uid="uid://dh4ewwwf3nhw" path="res://data/spells/black_hole/prefab.tscn" id="1_h3x1m"]
+[ext_resource type="Script" path="res://spells/SpawnProjectileSpellCastEfect.cs" id="1_it8y4"]
+[ext_resource type="Script" path="res://spells/SpellRecord.cs" id="1_slxyo"]
+[ext_resource type="Texture2D" uid="uid://bb5wrjau4k128" path="res://assets/icons/craftpix-icons/Fairy skill icons/14.png" id="3_dn2v2"]
+
+[sub_resource type="Resource" id="Resource_7ykar"]
+script = ExtResource("1_it8y4")
+Prefab = ExtResource("1_h3x1m")
+Speed = 3.0
+SpawnLocation = 0
+Lifetime = 15.0
+DestroyOnBallCollision = false
+DestroyOnWallCollision = true
+
+[resource]
+script = ExtResource("1_slxyo")
+Icon = ExtResource("3_dn2v2")
+Name = "Black Hole"
+Cost = 7
+ChargeDuration = 4.0
+Target = 2
+Effect = SubResource("Resource_7ykar")

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dsbpac1gwrxt3"
+path="res://.godot/imported/VFXMesh_04.obj-a97572bf639b3e3265999f82c3fd3fbf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/VFXMesh_04.obj-a97572bf639b3e3265999f82c3fd3fbf.mesh"]
+
+source_file="res://assets/util/vfx-meshes/VFXMesh_04.obj"
+dest_files=["res://.godot/imported/VFXMesh_04.obj-a97572bf639b3e3265999f82c3fd3fbf.mesh", "res://.godot/imported/VFXMesh_04.obj-a97572bf639b3e3265999f82c3fd3fbf.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

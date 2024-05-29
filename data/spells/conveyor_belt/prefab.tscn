@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgya5hf5cgpey"]
+
+[ext_resource type="Texture2D" uid="uid://v4w718e4dg0y" path="res://assets/util/vfx-noises/NoiseLava01.png" id="1_84ic5"]
+[ext_resource type="Script" path="res://world/SpellSpawnedPrefab/SpellSpawnedPrefab.cs" id="1_detui"]
+[ext_resource type="Shader" path="res://data/spells/conveyor_belt/prefab.gdshader" id="2_woe5o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lvcc3"]
+size = Vector3(2, 2.5, 5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nve66"]
+render_priority = 0
+shader = ExtResource("2_woe5o")
+shader_parameter/timeScaleFactor = 0.2
+shader_parameter/noise_texture = ExtResource("1_84ic5")
+
+[sub_resource type="BoxMesh" id="BoxMesh_6p1s0"]
+lightmap_size_hint = Vector2i(39, 41)
+material = SubResource("ShaderMaterial_nve66")
+size = Vector3(2, 1, 5)
+
+[node name="Prefab" type="Node3D"]
+script = ExtResource("1_detui")
+
+[node name="Area3D" type="Area3D" parent="."]
+gravity_space_override = 4
+gravity_point_center = Vector3(0, 0, 1)
+gravity_direction = Vector3(0, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_lvcc3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_6p1s0")

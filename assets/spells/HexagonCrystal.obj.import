@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cv1bhbtv5stmo"
+path="res://.godot/imported/HexagonCrystal.obj-cdebb6ab641991f6c98ee36c9f67c1ce.mesh"
+
+[deps]
+
+files=["res://.godot/imported/HexagonCrystal.obj-cdebb6ab641991f6c98ee36c9f67c1ce.mesh"]
+
+source_file="res://assets/spells/HexagonCrystal.obj"
+dest_files=["res://.godot/imported/HexagonCrystal.obj-cdebb6ab641991f6c98ee36c9f67c1ce.mesh", "res://.godot/imported/HexagonCrystal.obj-cdebb6ab641991f6c98ee36c9f67c1ce.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

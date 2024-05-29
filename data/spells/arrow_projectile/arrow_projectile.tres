@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="SpellRecord" load_steps=6 format=3 uid="uid://daqwrgavdanmj"]
+
+[ext_resource type="Script" path="res://spells/SpawnProjectileSpellCastEfect.cs" id="1_g0u6q"]
+[ext_resource type="PackedScene" uid="uid://5r3xpveol27q" path="res://data/spells/arrow_projectile/arrow_prefab.tscn" id="1_ptaf4"]
+[ext_resource type="Script" path="res://spells/SpellRecord.cs" id="1_xdml4"]
+[ext_resource type="Texture2D" uid="uid://bti0g0tgig87i" path="res://assets/icons/craftpix-icons/RPG Archer skill icons/Группа 1.png" id="3_hql4d"]
+
+[sub_resource type="Resource" id="Resource_objov"]
+script = ExtResource("1_g0u6q")
+Prefab = ExtResource("1_ptaf4")
+Speed = 40.0
+SpawnLocation = 1
+Lifetime = 10.0
+DestroyOnBallCollision = true
+DestroyOnWallCollision = false
+
+[resource]
+script = ExtResource("1_xdml4")
+Icon = ExtResource("3_hql4d")
+Name = "Sniper's Arrow"
+Cost = 2
+ChargeDuration = 0.5
+Target = 1
+Effect = SubResource("Resource_objov")

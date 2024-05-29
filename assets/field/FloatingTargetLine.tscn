@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dhjr8ktwkp2ai"]
+
+[node name="FloatingTargetLine" type="Area3D"]

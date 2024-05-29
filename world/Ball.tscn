@@ -11,7 +11,7 @@ bounce = 0.5
 radius = 1.0
 
 [node name="Ball" type="RigidBody3D"]
-collision_mask = 15
+collision_mask = 47
 physics_material_override = SubResource("PhysicsMaterial_kmitc")
 script = ExtResource("1_yhss5")
 
@@ -21,6 +21,7 @@ script = ExtResource("1_yhss5")
 shape = SubResource("SphereShape3D_ul03u")
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_mask = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_ul03u")

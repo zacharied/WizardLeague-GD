@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://djgbi7x5em28q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_langl"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0470588, 0.0470588, 0.0470588, 0.823529)
+
+[resource]
+HeaderLarge/font_sizes/normal_font_size = 28
+SpellIconManaCostLabel/base_type = &"RichTextLabel"
+SpellIconManaCostLabel/colors/default_color = Color(0, 0.423529, 0.752941, 1)
+SpellIconManaCostLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+SpellIconManaCostLabel/constants/outline_size = 6
+SpellIconManaCostLabel/constants/shadow_outline_size = 20
+SpellIconManaCostLabel/font_sizes/normal_font_size = 30
+SpellIconManaCostLabel_CannotCast/base_type = &"SpellIconManaCostLabel"
+SpellIconManaCostLabel_CannotCast/colors/default_color = Color(0.781076, 0, 0.238063, 1)
+SpellSlotContainer/base_type = &"MarginContainer"
+SpellSlotContainer/constants/margin_bottom = 15
+SpellSlotContainer/constants/margin_left = 30
+SpellSlotContainer/constants/margin_right = 30
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_langl")

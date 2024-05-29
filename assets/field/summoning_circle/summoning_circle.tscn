@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7rn5pxkrt6dh"]
+
+[ext_resource type="Texture2D" uid="uid://ux0jvcbwrk4y" path="res://assets/field/summoning_circle/IndicatorTex_21_Packed.png" id="1_27t1f"]
+
+[node name="SummoningCircle" type="Node3D"]
+
+[node name="Decal" type="Decal" parent="."]
+texture_albedo = ExtResource("1_27t1f")

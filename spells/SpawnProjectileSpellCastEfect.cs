@@ -1,4 +1,6 @@
+using System;
 using Godot;
+using wizardballz.world;
 
 namespace wizardballz.spells;
 
@@ -6,62 +8,58 @@ namespace wizardballz.spells;
 public partial class SpawnProjectileSpellCastEfect : SpellCastEffect
 {
     [Export] public PackedScene Prefab = null!;
-    [Export] public float Speed = 5f;
+    [Export] public float Speed = 12f;
+    [Export] public SpawnPoint SpawnLocation;
+    [Export] public float Lifetime = 10f;
+    [Export] public bool DestroyOnBallCollision = false;
+    [Export] public bool DestroyOnWallCollision = false;
 
-    private bool PrefabDestroyed = false;
-
-    private Node3D? PrefabInstance = null;
-    
-    public override void DoEffect()
+    public override void DoEffect(SpellInstance spellInstance)
     {
-        PrefabInstance = Prefab.Instantiate<Node3D>();
-        SpellInstance.PrefabRoot.AddChild(PrefabInstance);
-        PrefabInstance.GlobalPosition = SpellInstance.CastPosition;
-        PrefabInstance.TreeExiting += () =>
+        var prefab = Prefab.Instantiate<RigidBody3D>();
+        spellInstance.AddChild(prefab);
+        
+        // Setup collisions for auto-kill zone, ball, and wall
+        prefab.SetCollisionMaskValue(CollisionLayers.KillProjectile, true);
+        if (DestroyOnWallCollision) prefab.SetCollisionMaskValue(CollisionLayers.Wall, true);
+        if (DestroyOnBallCollision) prefab.SetCollisionMaskValue(CollisionLayers.Ball, true);
+        prefab.BodyEntered += AnyEntered;
+
+        prefab.GlobalPosition = SpawnLocation == SpawnPoint.Circle 
+            ? spellInstance.Caster.SpellCircle.GlobalPosition 
+            : spellInstance.Caster.SpawnPointTurretPosition;
+
+        var velocity = prefab.GlobalPosition.DirectionTo(spellInstance.TargetPosition) * Speed;
+        if (SpawnLocation == SpawnPoint.Circle)
+            velocity.Y = 0;
+        prefab.LinearVelocity = velocity;
+
+        var prefabHelper = new SpellSpawnedPrefab(Lifetime);
+        prefab.AddChild(prefabHelper);
+        
+        return;
+
+        void AnyEntered(Node other)
         {
-            PrefabDestroyed = true;
-        };
-        
-        SpellInstance.PrefabRoot.GetNode<DelayDrawer>("/root/DelayDrawer").RegisterNode(PrefabInstance, SpellInstance.PrefabRoot);
-        
-        ApplySpeed();
-    }
+            if (other is not PhysicsBody3D body3D) {
+                return;
+            }
 
-    public override bool IsFinished(float lifetime)
-    {
-        return PrefabDestroyed;
-    }
-
-    private void ApplySpeed()
-    {
-        var velocity = SpellInstance.CastPosition.DirectionTo(SpellInstance.TargetPosition) * Speed;
-        velocity.Y = 0;
-        if (PrefabInstance! is RigidBody3D body) {
-            body.LinearVelocity = velocity;
-            body.BodyEntered += node =>
+            if (body3D.GetCollisionLayerValue(CollisionLayers.KillProjectile) 
+                || (body3D.GetCollisionLayerValue(CollisionLayers.Wall) && DestroyOnWallCollision) 
+                || (body3D.GetCollisionLayerValue(CollisionLayers.Ball) && DestroyOnBallCollision)) 
             {
-                if (node is PhysicsBody3D body3D) {
-                    if ((body3D.CollisionLayer & ((1 << 2) | (1 << 0))) > 0) {
-                        CallDeferred(MethodName.RemovePrefabInstance);
-                    }
-                }
-            };
-        }
-        else if (PrefabInstance is CharacterBody3D charBody) {
-            charBody.Velocity = velocity;
-        }
-        else if (PrefabInstance is StaticBody3D staticBody) {
-            staticBody.ConstantLinearVelocity = velocity;
-        }
-        else {
-            GD.PushWarning($"Unable to apply velocity to projectile for spell {SpellInstance}");
+                spellInstance.GetTree().Connect(
+                    SceneTree.SignalName.ProcessFrame,
+                    Callable.From(spellInstance.FinishEffect),
+                    flags: (uint)ConnectFlags.OneShot);
+            }
         }
     }
 
-    private void RemovePrefabInstance()
+    public enum SpawnPoint
     {
-        SpellInstance.PrefabRoot.GetNode<DelayDrawer>("/root/DelayDrawer").MarkForDeletion(PrefabInstance!, SpellInstance.PrefabRoot);
-        SpellInstance.PrefabRoot.RemoveChild(PrefabInstance);
-        PrefabInstance!.QueueFree();
+        Circle,
+        Turret
     }
 }

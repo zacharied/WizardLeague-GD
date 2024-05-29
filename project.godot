@@ -13,11 +13,8 @@ config_version=5
 config/name="wizard-ballz"
 run/main_scene="res://MatchScene.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
+run/flush_stdout_on_print=true
 config/icon="res://icon.svg"
-
-[autoload]
-
-DelayDrawer="*res://world/DelayDrawer.cs"
 
 [dotnet]
 
@@ -27,9 +24,33 @@ project/assembly_name="wizard-ballz"
 
 enabled=PackedStringArray("res://addons/scene-tree-sorter/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://assets/": "pink",
+"res://data/": "green",
+"res://data/spells/": "green",
+"res://out/": "gray",
+"res://spells/": "blue",
+"res://test/": "yellow",
+"res://ui/": "blue",
+"res://world/": "blue"
+}
+
+[gui]
+
+theme/custom="res://ui/MainTheme.tres"
+
 [layer_names]
 
-3d_physics/layer_1="default"
+3d_physics/layer_1="ball"
 3d_physics/layer_2="field"
 3d_physics/layer_3="wall"
 3d_physics/layer_4="projectile"
+3d_physics/layer_5="kill_projectile"
+3d_physics/layer_6="spell_wall"
+
+[rendering]
+
+textures/default_filters/anisotropic_filtering_level=4

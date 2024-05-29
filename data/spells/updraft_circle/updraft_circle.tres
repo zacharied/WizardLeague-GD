@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SpellRecord" load_steps=6 format=3 uid="uid://dkpmb34cka50t"]
+
+[ext_resource type="Script" path="res://spells/SpawnPrefabSpellCastEffect.cs" id="1_1a4wp"]
+[ext_resource type="Script" path="res://spells/SpellRecord.cs" id="1_5w8at"]
+[ext_resource type="PackedScene" uid="uid://dj5nxp7px4uwi" path="res://data/spells/updraft_circle/prefab.tscn" id="1_tm2g0"]
+[ext_resource type="Texture2D" uid="uid://vampao332aw3" path="res://assets/icons/craftpix-icons/RPG Pyromancer skill icons/41.png" id="2_vkmcs"]
+
+[sub_resource type="Resource" id="Resource_fayg3"]
+script = ExtResource("1_1a4wp")
+Prefab = ExtResource("1_tm2g0")
+Lifetime = 9.0
+
+[resource]
+script = ExtResource("1_5w8at")
+Icon = ExtResource("2_vkmcs")
+Name = "Updraft"
+Cost = 4
+ChargeDuration = 1.5
+Target = 0
+Effect = SubResource("Resource_fayg3")

@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://bf1mnq6nehhcw"]
+
+[ext_resource type="PackedScene" uid="uid://tc7r60ks5v2v" path="res://ui/GameplayHud/ManaDisplay.tscn" id="1_luf2g"]
+[ext_resource type="Script" path="res://ui/GameplayHud/GameplayHud.cs" id="1_w1q6d"]
+[ext_resource type="PackedScene" uid="uid://cf6jtgkt6in62" path="res://ui/GameplayHud/SpellSlots.tscn" id="1_wh1tv"]
+[ext_resource type="PackedScene" uid="uid://dx2hboxk3d67h" path="res://ui/GameplayHud/SpellSlot.tscn" id="3_1vbwj"]
+[ext_resource type="Texture2D" uid="uid://d4b6a8bftqa54" path="res://assets/icons/skill-icons-pack/Curse/curse_1.png" id="5_7ndhj"]
+
+[node name="GameplayHud" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w1q6d")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+
+[node name="MarginContainer2" parent="HBox/VBoxContainer" instance=ExtResource("1_luf2g")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="HBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"SpellSlotContainer"
+
+[node name="SpellSlots" parent="HBox/VBoxContainer/MarginContainer" instance=ExtResource("1_wh1tv")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="HBox/VBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"SpellSlotContainer"
+
+[node name="PrimarySpellSlot" parent="HBox/VBoxContainer2/MarginContainer" instance=ExtResource("3_1vbwj")]
+unique_name_in_owner = true
+layout_mode = 2
+CostText = "0"
+SlotText = "LMB"
+Texture = ExtResource("5_7ndhj")
+
+[node name="CountdownLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/normal_font_size = 213
+text = "3"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

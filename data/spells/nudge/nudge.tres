@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SpellRecord" load_steps=7 format=3 uid="uid://bugg22mcwo7u2"]
+
+[ext_resource type="Texture2D" uid="uid://5dpgsg23p6v1" path="res://assets/icons/craftpix-icons/Paladin skill icons/23.png" id="1_d7ko8"]
+[ext_resource type="PackedScene" uid="uid://xlfqyv87sbs0" path="res://data/spells/nudge/nudge_prefab.tscn" id="1_dp1yw"]
+[ext_resource type="Script" path="res://spells/SpellRecord.cs" id="1_rlagg"]
+[ext_resource type="Script" path="res://data/spells/nudge/Effect.cs" id="1_uywna"]
+[ext_resource type="Script" path="res://spells/OneShotSpellCastEffect.cs" id="2_c7cvj"]
+
+[sub_resource type="Resource" id="Resource_fvg0q"]
+script = ExtResource("2_c7cvj")
+Script = ExtResource("1_uywna")
+Prefab = ExtResource("1_dp1yw")
+
+[resource]
+script = ExtResource("1_rlagg")
+Icon = ExtResource("1_d7ko8")
+Name = "Force"
+Cost = 2
+ChargeDuration = 0.5
+Target = 1
+Effect = SubResource("Resource_fvg0q")

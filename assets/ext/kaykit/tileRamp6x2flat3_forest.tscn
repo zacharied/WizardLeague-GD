@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfyx8ho0a8fqq"]
+[gd_scene load_steps=6 format=3 uid="uid://dfyx8ho0a8fqq"]
 
 [ext_resource type="PackedScene" uid="uid://cjly1san0le6e" path="res://assets/ext/kaykit/tileHigh_forest.gltf.glb" id="1_vxvor"]
 [ext_resource type="PackedScene" uid="uid://bgv0qwgjgjtm" path="res://assets/ext/kaykit/tileSlopeLowMedium_forest.gltf.glb" id="2_2i5gf"]
+[ext_resource type="PackedScene" uid="uid://b0f6su8uma2n6" path="res://assets/ext/kaykit/kaykit-tileHighForestCorner.glb" id="3_y5qeg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2mhs3"]
+size = Vector3(4, 11, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_31udx"]
+size = Vector3(8, 11, 1)
 
 [node name="tileRamp6x2flat3_forest" type="Node3D"]
 
@@ -59,15 +66,6 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 0.
 [node name="tileSlopeLowMedium_forest_gltf34" parent="." instance=ExtResource("2_2i5gf")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 0.54, -3)
 
-[node name="tileHigh_forest_gltf61" parent="." instance=ExtResource("1_vxvor")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
-
-[node name="tileHigh_forest_gltf62" parent="." instance=ExtResource("1_vxvor")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5)
-
-[node name="tileHigh_forest_gltf63" parent="." instance=ExtResource("1_vxvor")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
-
 [node name="tileSlopeLowMedium_forest_gltf35" parent="." instance=ExtResource("2_2i5gf")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4, 0, -5)
 
@@ -80,17 +78,38 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 0.
 [node name="tileSlopeLowMedium_forest_gltf33" parent="." instance=ExtResource("2_2i5gf")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 0.54, 3)
 
-[node name="tileHigh_forest_gltf64" parent="." instance=ExtResource("1_vxvor")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-
-[node name="tileHigh_forest_gltf65" parent="." instance=ExtResource("1_vxvor")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
-
-[node name="tileHigh_forest_gltf66" parent="." instance=ExtResource("1_vxvor")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5)
-
 [node name="tileSlopeLowMedium_forest_gltf31" parent="." instance=ExtResource("2_2i5gf")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4, 0, 5)
 
 [node name="tileSlopeLowMedium_forest_gltf37" parent="." instance=ExtResource("2_2i5gf")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 0.54, 5)
+
+[node name="kaykit-tileHighForestCorner" parent="." instance=ExtResource("3_y5qeg")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -5)
+
+[node name="kaykit-tileHighForestCorner2" parent="." instance=ExtResource("3_y5qeg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+collision_layer = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("BoxShape3D_2mhs3")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4)
+collision_layer = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("BoxShape3D_2mhs3")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 0, 0)
+collision_layer = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("BoxShape3D_31udx")

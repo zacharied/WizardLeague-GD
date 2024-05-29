@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf6jtgkt6in62"]
+
+[ext_resource type="PackedScene" uid="uid://dx2hboxk3d67h" path="res://ui/GameplayHud/SpellSlot.tscn" id="1_nbws0"]
+
+[node name="SpellSlots" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="SpellSlot1" parent="." instance=ExtResource("1_nbws0")]
+layout_mode = 2
+SlotText = "1"
+
+[node name="SpellSlot2" parent="." instance=ExtResource("1_nbws0")]
+layout_mode = 2
+SlotText = "2"
+
+[node name="SpellSlot3" parent="." instance=ExtResource("1_nbws0")]
+layout_mode = 2
+SlotText = "3"

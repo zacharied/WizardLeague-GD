@@ -1,10 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://ctiyklja6rvt1"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_2u0fr"]
-radius = 2.0
-height = 4.0
+[ext_resource type="Texture2D" uid="uid://d32758o0t2oeo" path="res://assets/field/summoning_circle/IndicatorTex_12.png" id="1_o3tgg"]
 
 [node name="WorldCursor" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_2u0fr")
+[node name="Decal" type="Decal" parent="."]
+texture_albedo = ExtResource("1_o3tgg")
+texture_emission = ExtResource("1_o3tgg")

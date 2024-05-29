@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="SpawnProjectileSpellCastEfect" load_steps=3 format=3 uid="uid://bdhvdc3sqybbw"]
-
-[ext_resource type="Script" path="res://spells/SpawnProjectileSpellCastEfect.cs" id="1_dfttu"]
-[ext_resource type="PackedScene" uid="uid://bafp8nte5xx6g" path="res://data/spells/ground_projectile/prefab.tscn" id="1_yulif"]
-
-[resource]
-script = ExtResource("1_dfttu")
-Prefab = ExtResource("1_yulif")
-Speed = 15.0

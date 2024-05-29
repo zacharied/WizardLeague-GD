@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfrhx2y2mg76"]
+
+[ext_resource type="Script" path="res://world/SpellSpawnedPrefab/SpellSpawnedPrefab.cs" id="1_3p1ny"]
+[ext_resource type="ArrayMesh" uid="uid://bj364j8tlywrm" path="res://assets/spells/Shard01.obj" id="1_tfyyx"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4lm25"]
+points = PackedVector3Array(-0.216339, 0.0988344, -0.203408, 0.00216802, -0.233045, 0.137368, 0.0196957, -0.224708, 0.093917, 0.134858, 0.258976, 0.18344, 0.180021, -0.0240104, -0.295269, -0.20853, 0.0465132, 0.15585, -0.181608, -0.102286, -0.142336, 0.22848, -0.00586208, -0.0284714, 0.0903809, 0.222998, -0.0814817, 0.141693, 0.0986512, 0.224291, 0.161658, -0.183294, -0.117163, -0.0504381, 0.151818, 0.260997, -0.164006, 0.186423, -0.142285, 0.062598, -0.230308, 0.161465, 0.226797, 0.0891975, -0.175288, -0.0327502, -0.0584579, -0.282029, -0.156078, -0.111649, 0.138532, 0.232193, 0.108728, 0.0420987, -0.0239782, -0.163217, -0.142053, 0.1884, -0.112591, -0.241317, -0.0241431, -0.208489, 0.182609, -0.146279, -0.171968, -0.0110973, -0.243071, 0.0727357, -0.0373073, 0.0544288, 0.255285, 0.058538, -0.0240462, -0.0147654, -0.300199, -0.216358, 0.0289079, -0.203424, 0.0290198, 0.189842, 0.265733, 0.115195, -0.101496, 0.171443, 0.1869, 0.204919, 0.156063, -0.241254, 0.107065, -0.0980159, -0.0928855, 0.210191, -0.0284084, 0.108787, 0.2422, 0.228613)
+
+[node name="Prefab" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 7
+mass = 50.0
+max_contacts_reported = 2
+contact_monitor = true
+script = ExtResource("1_3p1ny")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+mesh = ExtResource("1_tfyyx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_4lm25")

@@ -1,37 +1,47 @@
+using System;
 using Godot;
 using wizardballz.spells;
 
 namespace wizardballz.world;
 
+/// <summary>
+/// A cast of a spell. <see cref="Lifetime"/> begins ticking as soon as the object is added to tree.
+/// </summary>
 public partial class SpellInstance : Node3D
 {
-    public uint PlayerIndex { get; private set; } = 0;
-    public Node3D PrefabRoot { get; private set; } = null!;
-    public Node3D Ball { get; private set; } = null!;
+    [Signal]
+    public delegate void SpellChargeFinishedEventHandler();
+
+    [Signal]
+    public delegate void SpellEffectEndedEventHandler();
+    
+    public ulong SpellId { get; private set; } = 0;
+    public RigidBody3D Ball { get; private set; } = null!;
     public SpellRecord Record { get; private set; } = null!;
-    public Vector3 CastPosition { get; private set; }
+    public GamePlayer Caster { get; private set; }
     public Vector3 TargetPosition { get; private set; }
+    public Vector3 SourcePosition { get; private set; }
 
     private SpellCastEffect Effect = null!;
     
     private float Lifetime = 0;
-    private SpellState State = SpellState.Charging;
+    public SpellState State = SpellState.Charging;
+    public bool AnimationLock = false;
 
-    public SpellInstance Init(uint playerIndex, SpellRecord spellRecord, Node3D ball, Node3D prefabRoot, Vector3 castPosition, Vector3 targetPosition)
+    public SpellInstance Init(ulong spellId, SpellRecord spellRecord, RigidBody3D ball, GamePlayer caster, Vector3 targetPosition)
     {
-        PlayerIndex = playerIndex;
+        SpellId = spellId;
         Record = spellRecord;
         Ball = ball;
-        PrefabRoot = prefabRoot;
-        CastPosition = castPosition;
+        Caster = caster;
         TargetPosition = targetPosition;
+        SourcePosition = Caster.SpellCircle.GlobalPosition;
         return this;
     }
 
     public override void _Ready()
     {
         Effect = (SpellCastEffect)Record.Effect.Duplicate();
-        Effect.Init(this);
     }
 
     public override void _Process(double delta)
@@ -40,16 +50,24 @@ public partial class SpellInstance : Node3D
 
         if (State == SpellState.Charging) {
             if (Lifetime > Record.ChargeDuration) {
-                GD.Print($"Finished charge for spell {Record.Name}, casting!");
                 State = SpellState.PerformingEffect;
-                Effect.DoEffect();
+                EmitSignal(SignalName.SpellChargeFinished);
+                
+                GD.Print($"CAST SPELL {SpellId} \"{Record.Name}\"");
+                Effect.DoEffect(this);
             }
         }
+    }
+
+    public void FinishEffect()
+    {
+        State = SpellState.Finished;
     }
 
     public enum SpellState
     {
         Charging,
-        PerformingEffect
+        PerformingEffect,
+        Finished
     }
 }

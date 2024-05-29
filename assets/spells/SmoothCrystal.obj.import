@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bqjq1hm7yolgo"
+path="res://.godot/imported/SmoothCrystal.obj-3be8f1f4f7fd60f025f3205369568372.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SmoothCrystal.obj-3be8f1f4f7fd60f025f3205369568372.mesh"]
+
+source_file="res://assets/spells/SmoothCrystal.obj"
+dest_files=["res://.godot/imported/SmoothCrystal.obj-3be8f1f4f7fd60f025f3205369568372.mesh", "res://.godot/imported/SmoothCrystal.obj-3be8f1f4f7fd60f025f3205369568372.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

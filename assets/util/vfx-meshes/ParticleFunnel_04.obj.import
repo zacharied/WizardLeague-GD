@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bbhvqxmh3rxp6"
+path="res://.godot/imported/ParticleFunnel_04.obj-62a796fe7d4d6cda31be7d4dc2eb7507.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ParticleFunnel_04.obj-62a796fe7d4d6cda31be7d4dc2eb7507.mesh"]
+
+source_file="res://assets/util/vfx-meshes/ParticleFunnel_04.obj"
+dest_files=["res://.godot/imported/ParticleFunnel_04.obj-62a796fe7d4d6cda31be7d4dc2eb7507.mesh", "res://.godot/imported/ParticleFunnel_04.obj-62a796fe7d4d6cda31be7d4dc2eb7507.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

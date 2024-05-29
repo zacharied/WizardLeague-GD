@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx2hboxk3d67h"]
+
+[ext_resource type="Script" path="res://ui/GameplayHud/SpellSlot.cs" id="1_pse18"]
+[ext_resource type="Shader" path="res://ui/GameplayHud/SpellSlot.gdshader" id="2_ku7nu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8yj0k"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kw7mv"]
+resource_local_to_scene = true
+shader = ExtResource("2_ku7nu")
+shader_parameter/fill_ratio = 1.0
+shader_parameter/start_angle = 0.0
+shader_parameter/max_angle = 360.0
+shader_parameter/invert_fill = false
+shader_parameter/reflect_x = false
+shader_parameter/reflect_y = false
+shader_parameter/offset = Vector2(0, 0)
+
+[node name="SpellSlot" type="VBoxContainer"]
+tooltip_text = "Tooltip!"
+mouse_filter = 0
+script = ExtResource("1_pse18")
+CostText = "5"
+
+[node name="IconContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_8yj0k")
+
+[node name="SpellIcon" type="TextureRect" parent="IconContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_kw7mv")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 3
+
+[node name="SpellCostLabel" type="RichTextLabel" parent="IconContainer/SpellIcon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.2
+anchor_top = -0.3
+anchor_right = 1.2
+offset_left = -17.0
+offset_bottom = 42.0
+grow_horizontal = 0
+mouse_filter = 1
+theme_type_variation = &"SpellIconManaCostLabel"
+text = "5"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+
+[node name="SlotNumberLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

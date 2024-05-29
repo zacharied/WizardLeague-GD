@@ -7,6 +7,5 @@ public partial class Ball : RigidBody3D
 
     public override void _Ready()
     {
-        GetNode<DelayDrawer>("/root/DelayDrawer").RegisterNode(this, GetParentNode3D());
     }
 }

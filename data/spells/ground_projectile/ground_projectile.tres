@@ -1,11 +1,24 @@
-[gd_resource type="Resource" script_class="SpellRecord" load_steps=3 format=3 uid="uid://bul6w5s4rqfaa"]
+[gd_resource type="Resource" script_class="SpellRecord" load_steps=6 format=3 uid="uid://bul6w5s4rqfaa"]
 
-[ext_resource type="Resource" uid="uid://bdhvdc3sqybbw" path="res://data/spells/ground_projectile/effect.tres" id="1_3qprh"]
-[ext_resource type="Script" path="res://world/SpellRecord.cs" id="1_o87tm"]
+[ext_resource type="PackedScene" uid="uid://bafp8nte5xx6g" path="res://data/spells/ground_projectile/prefab.tscn" id="1_ihak2"]
+[ext_resource type="Script" path="res://spells/SpellRecord.cs" id="1_ln0c4"]
+[ext_resource type="Script" path="res://spells/SpawnProjectileSpellCastEfect.cs" id="2_6rlsy"]
+[ext_resource type="Texture2D" uid="uid://pb504vj78lo1" path="res://assets/icons/skill-icons-pack/Damage/damage_2.png" id="3_gmikk"]
+
+[sub_resource type="Resource" id="Resource_76rak"]
+script = ExtResource("2_6rlsy")
+Prefab = ExtResource("1_ihak2")
+Speed = 12.0
+SpawnLocation = 0
+Lifetime = 10.0
+DestroyOnBallCollision = true
+DestroyOnWallCollision = true
 
 [resource]
-script = ExtResource("1_o87tm")
-Name = "Ground Projectile"
+script = ExtResource("1_ln0c4")
+Icon = ExtResource("3_gmikk")
+Name = "Ground Spike"
 Cost = 0
-ChargeDuration = 0.5
-Effect = ExtResource("1_3qprh")
+ChargeDuration = 0.75
+Target = 0
+Effect = SubResource("Resource_76rak")

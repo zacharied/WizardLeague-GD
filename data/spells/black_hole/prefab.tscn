@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://dh4ewwwf3nhw"]
+
+[ext_resource type="Shader" path="res://data/spells/black_hole/prefab.gdshader" id="1_7juk0"]
+[ext_resource type="Texture2D" uid="uid://bejrxg3tcxx0s" path="res://assets/util/vfx-noises/HPNoiseStrings03.png" id="2_ewkok"]
+[ext_resource type="Texture2D" uid="uid://br3l6ggsb70ax" path="res://assets/util/vfx-noises/HPNoiseOrganic01.png" id="3_b1ng3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6dekh"]
+friction = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vhsql"]
+render_priority = 0
+shader = ExtResource("1_7juk0")
+shader_parameter/tint = null
+shader_parameter/distortionVertex = 0.03
+shader_parameter/speedVertex = 0.5
+shader_parameter/lightningNoise1 = ExtResource("2_ewkok")
+shader_parameter/lightningNoise2 = ExtResource("3_b1ng3")
+
+[sub_resource type="SphereMesh" id="SphereMesh_0jmg4"]
+material = SubResource("ShaderMaterial_vhsql")
+radius = 2.5
+height = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a2kld"]
+radius = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7s2ik"]
+radius = 2.0
+
+[node name="RigidBody3D" type="RigidBody3D"]
+collision_layer = 0
+collision_mask = 0
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_6dekh")
+gravity_scale = 0.0
+lock_rotation = true
+max_contacts_reported = 2
+contact_monitor = true
+linear_damp_mode = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_0jmg4")
+skeleton = NodePath("")
+
+[node name="Area3D" type="Area3D" parent="."]
+gravity_space_override = 4
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_a2kld")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7s2ik")

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dmljt84b5sase"
+path="res://.godot/imported/Shard02.obj-793c87cfd40d5775a8eb6e3bcd26bd36.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Shard02.obj-793c87cfd40d5775a8eb6e3bcd26bd36.mesh"]
+
+source_file="res://assets/spells/Shard02.obj"
+dest_files=["res://.godot/imported/Shard02.obj-793c87cfd40d5775a8eb6e3bcd26bd36.mesh", "res://.godot/imported/Shard02.obj-793c87cfd40d5775a8eb6e3bcd26bd36.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

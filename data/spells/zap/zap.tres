@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpellRecord" load_steps=3 format=3 uid="uid://bmn5r8amqxjw6"]
+
+[ext_resource type="Script" path="res://spells/SpellRecord.cs" id="1_anh4o"]
+[ext_resource type="Texture2D" uid="uid://oexok08ontva" path="res://assets/icons/craftpix-icons/Night elf skill icons/14.png" id="1_bg4cv"]
+
+[resource]
+script = ExtResource("1_anh4o")
+Icon = ExtResource("1_bg4cv")
+Name = "Zap"
+Cost = 4
+ChargeDuration = 3.0
+Target = 1

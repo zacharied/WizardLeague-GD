@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b7pu8vgjagg4e"
+path="res://.godot/imported/FakeTrail_02.obj-f52c57ff7ca5983e583686395635f674.mesh"
+
+[deps]
+
+files=["res://.godot/imported/FakeTrail_02.obj-f52c57ff7ca5983e583686395635f674.mesh"]
+
+source_file="res://assets/util/vfx-meshes/FakeTrail_02.obj"
+dest_files=["res://.godot/imported/FakeTrail_02.obj-f52c57ff7ca5983e583686395635f674.mesh", "res://.godot/imported/FakeTrail_02.obj-f52c57ff7ca5983e583686395635f674.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

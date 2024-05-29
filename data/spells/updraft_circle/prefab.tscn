@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://dj5nxp7px4uwi"]
+
+[ext_resource type="Script" path="res://world/SpellSpawnedPrefab/SpellSpawnedPrefab.cs" id="1_8ywjc"]
+[ext_resource type="Shader" path="res://data/spells/updraft_circle/prefab.gdshader" id="1_xhwen"]
+[ext_resource type="Texture2D" uid="uid://v4w718e4dg0y" path="res://assets/util/vfx-noises/NoiseLava01.png" id="2_y5nkd"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qkqkf"]
+height = 4.0
+radius = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fiwec"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wqlag"]
+lightmap_size_hint = Vector2i(64, 24)
+material = SubResource("ShaderMaterial_fiwec")
+top_radius = 5.0
+bottom_radius = 5.0
+height = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7oypm"]
+render_priority = 0
+shader = ExtResource("1_xhwen")
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/noise_texture = ExtResource("2_y5nkd")
+
+[node name="Prefab" type="Node3D"]
+script = ExtResource("1_8ywjc")
+
+[node name="Area3D" type="Area3D" parent="."]
+gravity_space_override = 3
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_qkqkf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_wqlag")
+surface_material_override/0 = SubResource("ShaderMaterial_7oypm")

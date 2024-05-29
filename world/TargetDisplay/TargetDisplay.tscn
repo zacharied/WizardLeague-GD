@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwg02wbip3jaj"]
+
+[ext_resource type="Script" path="res://world/TargetDisplay/TargetDisplay.cs" id="1_3ifc3"]
+[ext_resource type="Texture2D" uid="uid://wl6biqt3sgs2" path="res://assets/field/line.png" id="2_mcksx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kqo2b"]
+size = Vector3(0.15, 0.15, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cp3w"]
+shading_mode = 0
+shadow_to_opacity = true
+
+[node name="TargetDisplay" type="Node3D" groups=["client_side"]]
+script = ExtResource("1_3ifc3")
+
+[node name="TargetLineDecal" type="Decal" parent="."]
+size = Vector3(0.3, 2, 41)
+texture_albedo = ExtResource("2_mcksx")
+texture_emission = ExtResource("2_mcksx")
+
+[node name="Remainder" type="Decal" parent="TargetLineDecal"]
+size = Vector3(0.3, 2, 41)
+texture_albedo = ExtResource("2_mcksx")
+texture_emission = ExtResource("2_mcksx")
+emission_energy = 0.2
+modulate = Color(1, 1, 1, 0.113725)
+
+[node name="FloatingTargetLine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.22973, 0)
+mesh = SubResource("BoxMesh_kqo2b")
+surface_material_override/0 = SubResource("StandardMaterial3D_2cp3w")

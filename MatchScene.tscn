@@ -1,14 +1,24 @@
-[gd_scene load_steps=11 format=3 uid="uid://b148fg0in0do3"]
+[gd_scene load_steps=23 format=3 uid="uid://b148fg0in0do3"]
 
 [ext_resource type="PackedScene" uid="uid://b8g4p0nvbrhxt" path="res://game_field.tscn" id="1_n1mex"]
 [ext_resource type="PackedScene" uid="uid://p7c7asujcb0w" path="res://world/Ball.tscn" id="2_c6pmm"]
 [ext_resource type="Script" path="res://world/GameInput.cs" id="3_grpml"]
 [ext_resource type="Script" path="res://world/SpellManager/SpellManager.cs" id="4_404qd"]
-[ext_resource type="Resource" uid="uid://bul6w5s4rqfaa" path="res://data/spells/ground_projectile/ground_projectile.tres" id="4_m2qxx"]
 [ext_resource type="PackedScene" uid="uid://ctiyklja6rvt1" path="res://assets/field/world_cursor.tscn" id="5_gaiuv"]
 [ext_resource type="PackedScene" uid="uid://ca52bpbkpvqm6" path="res://world/GameMatch.tscn" id="7_fq4if"]
-[ext_resource type="Script" path="res://world/DelayDrawer.cs" id="8_5vs7t"]
-[ext_resource type="PackedScene" uid="uid://bcybhu1k80vyu" path="res://assets/ext/kaykit/ball.gltf.glb" id="9_ym566"]
+[ext_resource type="Script" path="res://world/Network/NetworkSpellManager.cs" id="7_lpfvv"]
+[ext_resource type="Script" path="res://spells/SpellDeck/SpellDeck.cs" id="10_aibr4"]
+[ext_resource type="Script" path="res://world/NetworkGame.cs" id="10_wnbby"]
+[ext_resource type="Resource" uid="uid://c7vlpva3tfipn" path="res://data/spells/black_hole/black_hole.tres" id="11_51oxm"]
+[ext_resource type="Resource" uid="uid://bul6w5s4rqfaa" path="res://data/spells/ground_projectile/ground_projectile.tres" id="11_wmcon"]
+[ext_resource type="PackedScene" uid="uid://bf1mnq6nehhcw" path="res://ui/GameplayHud/GameplayHud.tscn" id="12_h06fn"]
+[ext_resource type="Resource" uid="uid://bugg22mcwo7u2" path="res://data/spells/nudge/nudge.tres" id="12_ls1wo"]
+[ext_resource type="PackedScene" uid="uid://dwg02wbip3jaj" path="res://world/TargetDisplay/TargetDisplay.tscn" id="12_mto5x"]
+[ext_resource type="Resource" uid="uid://n2uumrhevosb" path="res://data/spells/conveyor_belt/conveyor_belt.tres" id="12_s4luc"]
+[ext_resource type="Material" uid="uid://bnsvy5op0jhe3" path="res://world/IndicatorDisplay/spell_prefab_preview_material.tres" id="13_6gi3x"]
+[ext_resource type="Script" path="res://world/IndicatorDisplay/IndicatorDisplay.cs" id="14_w2lk5"]
+[ext_resource type="Texture2D" uid="uid://d32758o0t2oeo" path="res://assets/field/summoning_circle/IndicatorTex_12.png" id="15_uv631"]
+[ext_resource type="Texture2D" uid="uid://wl6biqt3sgs2" path="res://assets/field/line.png" id="21_hoohb"]
 
 [sub_resource type="Environment" id="Environment_pt7b7"]
 ssr_enabled = true
@@ -16,33 +26,56 @@ ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_myu3i"]
+properties/0/path = NodePath("Ball:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Ball:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("GameMatch:CountdownTimer")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("GameMatch:PlayState")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[sub_resource type="Resource" id="Resource_xv13o"]
+script = ExtResource("10_aibr4")
+Spells = Array[Object]([ExtResource("12_s4luc"), ExtResource("11_51oxm"), ExtResource("12_ls1wo")])
+
 [node name="MatchScene" type="Node3D"]
 
 [node name="GameField" parent="." instance=ExtResource("1_n1mex")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00435829, 1.33218, -0.563825)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00435829, 1.33218, -1.56383)
 
 [node name="SpellPrefabRoot" type="Node3D" parent="."]
 
 [node name="Ball" parent="." instance=ExtResource("2_c6pmm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 3)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.594051, 0.31985, -0.738105, 7.45058e-09, 0.917553, 0.397612, 0.804428, -0.236202, 0.545073, -16.1522, 14.7849, 11.6333)
+transform = Transform3D(0.594051, 0.31985, -0.738105, 7.45058e-09, 0.917554, 0.397612, 0.804428, -0.236202, 0.545073, -16.1522, 14.7849, 15.6333)
 projection = 1
+current = true
 size = 25.0
 
-[node name="Input" type="Node3D" parent="." node_paths=PackedStringArray("Camera", "SpellManager")]
+[node name="Input" type="Node3D" parent="." node_paths=PackedStringArray("Camera", "SpellManager", "GameMatch")]
 script = ExtResource("3_grpml")
 Camera = NodePath("../Camera3D")
-SpellManager = NodePath("../SpellManager")
-DefaultSpell = ExtResource("4_m2qxx")
+SpellManager = NodePath("../NetworkSpellManager")
+GameMatch = NodePath("../GameMatch")
 WorldCursorPrefab = ExtResource("5_gaiuv")
 
-[node name="SpellManager" type="Node3D" parent="." node_paths=PackedStringArray("SpellPrefabRoot", "GameField", "Ball")]
+[node name="SpellManager" type="Node3D" parent="." node_paths=PackedStringArray("GameField", "Ball")]
 script = ExtResource("4_404qd")
-SpellPrefabRoot = NodePath("../SpellPrefabRoot")
 GameField = NodePath("../GameField")
 Ball = NodePath("../Ball")
+
+[node name="NetworkSpellManager" type="Node3D" parent="." node_paths=PackedStringArray("SpellManager", "GameMatch")]
+script = ExtResource("7_lpfvv")
+SpellManager = NodePath("../SpellManager")
+GameMatch = NodePath("../GameMatch")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pt7b7")
@@ -57,7 +90,34 @@ shadow_blur = 0.466
 Field = NodePath("../GameField")
 Ball = NodePath("../Ball")
 
-[node name="DelayDrawer" type="Node3D" parent="." node_paths=PackedStringArray("PhysicalBall")]
-script = ExtResource("8_5vs7t")
-PhysicalBall = NodePath("../Ball")
-BallScene = ExtResource("9_ym566")
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_interval = 0.016
+replication_config = SubResource("SceneReplicationConfig_myu3i")
+
+[node name="NetworkGame" type="Node" parent="." node_paths=PackedStringArray("GameMatch", "Synchronizer", "NetworkSpellManager", "SpellManager")]
+script = ExtResource("10_wnbby")
+GameMatch = NodePath("../GameMatch")
+Synchronizer = NodePath("../MultiplayerSynchronizer")
+NetworkSpellManager = NodePath("../NetworkSpellManager")
+SpellManager = NodePath("../SpellManager")
+DefaultPrimarySpell = ExtResource("11_wmcon")
+DefaultSpellDeck = SubResource("Resource_xv13o")
+
+[node name="TargetDisplay" parent="." node_paths=PackedStringArray("GameInput", "GameMatch", "CanvasLayer", "Camera") instance=ExtResource("12_mto5x")]
+GameInput = NodePath("../Input")
+GameMatch = NodePath("../GameMatch")
+CanvasLayer = NodePath("../CanvasLayer")
+Camera = NodePath("../Camera3D")
+TransparentMaterial = ExtResource("13_6gi3x")
+
+[node name="IndicatorDisplay" type="Node3D" parent="." node_paths=PackedStringArray("SpellManager") groups=["client_side"]]
+script = ExtResource("14_w2lk5")
+SpellManager = NodePath("../SpellManager")
+DefaultIndicator = ExtResource("15_uv631")
+DefaultLine = ExtResource("21_hoohb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." groups=["client_side"]]
+
+[node name="GameplayHud" parent="CanvasLayer" node_paths=PackedStringArray("GameMatch", "GameInput") instance=ExtResource("12_h06fn")]
+GameMatch = NodePath("../../GameMatch")
+GameInput = NodePath("../../Input")
