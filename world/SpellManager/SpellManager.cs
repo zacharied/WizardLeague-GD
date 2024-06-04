@@ -43,10 +43,16 @@ public partial class SpellManager : Node3D
         {
             SpellRecord.TargetType.FieldPosition => inputPosition,
             SpellRecord.TargetType.Ball => Ball.GlobalPosition,
-            SpellRecord.TargetType.Fixed => GameField.SpellCastSpawns[(caster.PlayerIndex + 1) % 2].GlobalPosition,
+            SpellRecord.TargetType.Fixed => GameField.SpellCastSpawns[(caster.GetPlayerIndex() + 1) % 2].GlobalPosition,
             _ => throw new IndexOutOfRangeException()
         };
-        var spellInstance = new SpellInstance().Init(spellId, (SpellRecord)spellRecord.Duplicate(), Ball, caster, spellTarget);
+        var spellInstance = new SpellInstance().Init(
+            spellId,
+            (SpellRecord)spellRecord.Duplicate(),
+            Ball,
+            caster,
+            GameField,
+            spellTarget);
         spellInstance.SetMeta(Meta_ResourcePath, resourcePath);
         spellInstance.SpellChargeFinished += () => {
             EmitSignal(SpellInstance.SignalName.SpellChargeFinished, spellInstance.SpellId);

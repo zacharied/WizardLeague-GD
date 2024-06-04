@@ -11,6 +11,7 @@ public partial class TargetDisplay : Node3D
 {
     [Export] public GameInput GameInput = null!;
     [Export] public GameMatch GameMatch = null!;
+    [Export] public GameField GameField = null!;
     [Export] public CanvasLayer CanvasLayer = null!;
     [Export] public Camera3D Camera = null!;
     
@@ -26,13 +27,13 @@ public partial class TargetDisplay : Node3D
 
     public override void _Ready()
     {
-        GodotUtil.ThrowIfNotPopulated(GameInput, GameMatch, CanvasLayer, Camera);
+        GodotUtil.ThrowIfNotPopulated(GameInput, GameMatch, GameField, CanvasLayer, Camera);
 
         TargetLineDecal = GetNode<Decal>("TargetLineDecal");
         TargetLineRemainder = TargetLineDecal.GetNode<Decal>("Remainder");
         FloatingTargetLine = GetNode<MeshInstance3D>("FloatingTargetLine");
 
-        GameInput.SpellSelected += PopulateForSpell;
+        GameInput.SpellSelected += (spell, _) => PopulateForSpell(spell);
         GameMatch.Connect(GameMatch.SignalName.PlayStateChanged, Callable.From<uint>(newStateU =>
         {
             if (newStateU == (uint)GameMatch.MatchPlayState.Active && IsNodeReady()) {
@@ -61,8 +62,8 @@ public partial class TargetDisplay : Node3D
         {
             if (!TargetLineDecal.Visible)
                 return;
-            
-            var point1 = GameMatch.GetLocalPlayer().SpellCircle.GlobalPosition;
+
+            var point1 = GameField.SpellCastSpawns[GameMatch.GetLocalPlayer().GetPlayerIndex()].GlobalPosition;
             var point2 = GameInput.WorldCursorCoordinates;
             var midpoint = (point1 + point2) / 2;
             var rotation = -new Vector2(point2.X, point2.Z).AngleToPoint(new(point1.X, point1.Z)) + Mathf.Pi / 2;
@@ -79,7 +80,7 @@ public partial class TargetDisplay : Node3D
             if (!FloatingTargetLine.Visible)
                 return;
 
-            var point1 = GameMatch.GetLocalPlayer().SpawnPointTurretPosition;
+            var point1 = GameField.TurretPositions[GameMatch.GetLocalPlayer().GetPlayerIndex()];
             var point2 = BallFocus ? GameMatch.Ball.GlobalPosition : GameInput.WorldCursorCoordinates;
             var midpoint = (point1 + point2) / 2;
             FloatingTargetLine.GlobalPosition = midpoint;

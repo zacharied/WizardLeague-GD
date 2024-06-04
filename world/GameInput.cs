@@ -10,7 +10,7 @@ namespace wizardballz.world;
 public partial class GameInput : Node3D
 {
     [Signal]
-    public delegate void SpellSelectedEventHandler(SpellRecord spellRecord);
+    public delegate void SpellSelectedEventHandler(SpellRecord spellRecord, uint uSpellSlotEnum);
     
     public const float MouseRaycastLength = 1000;
     
@@ -33,7 +33,7 @@ public partial class GameInput : Node3D
             
             var spell = GameMatch?.GetLocalPlayer().SpellSlots[SelectedSpellSlot];
             if (spell != null) {
-                EmitSignal(SignalName.SpellSelected, spell);
+                EmitSignal(SignalName.SpellSelected, spell, (uint)SelectedSpellSlot);
             }
         }
     }

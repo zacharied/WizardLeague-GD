@@ -13,12 +13,14 @@ public partial class IndicatorDisplay : Node3D
     private const string Meta_DepleteQuickly = "deplete_quickly";
 
     [Export] public SpellManager SpellManager = null!;
+    [Export] public GameField GameField = null!;
     [Export] public Texture2D DefaultIndicator = null!;
     [Export] public Texture2D DefaultLine = null!;
 
     public override void _Ready()
     {
-        GodotUtil.ThrowIfNotPopulated(SpellManager, DefaultIndicator);
+        GodotUtil.ThrowIfNotPopulated(SpellManager, GameField, DefaultIndicator, DefaultLine);
+        
         var node = new Node();
         AddChild(node);
         GD.Print(node);
@@ -29,7 +31,7 @@ public partial class IndicatorDisplay : Node3D
             if (SpellManager.TryGetSpellInstance(spellId, out var spellInstance)) {
                 GD.Print(spellInstance);
                 if (spellInstance.Record.Effect is SpawnProjectileSpellCastEfect effect) {
-                    DrawIndicatorLine(spellInstance.TargetPosition, spellInstance.SourcePosition, spellId);
+                    DrawIndicatorLine(spellInstance.TargetPosition, effect.GetSourcePosition(GameField, spellInstance.Caster), spellId);
                 }
                 else if (spellInstance.Record.Effect is SpawnPrefabSpellCastEffect prefabEffect) {
                     var tempPrefab = prefabEffect.Prefab.Instantiate<Node3D>();

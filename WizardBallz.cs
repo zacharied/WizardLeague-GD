@@ -2,12 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Godot;
+using wizardballz.spells;
 
 namespace wizardballz;
 
 public static class WizardBallz
 {
     public const uint PlayerCount = 2;
+
+    public static IEnumerable<SpellRecord> GetAllSpells()
+    {
+        foreach (var directory in DirAccess.Open("res://data/spells").GetDirectories()) {
+            var spellPath = $"{directory}/{directory.Split("/").Last()}.tres";
+            if (FileAccess.FileExists(spellPath)) {
+                yield return GD.Load<SpellRecord>(spellPath);
+            }
+        }
+    }
 }
 
 public static class Util

@@ -16,7 +16,7 @@ public partial class OneShotSpellCastEffect : SpellCastEffect
     /// </summary>
     [Export] private PackedScene? Prefab;
 
-    public override void DoEffect(SpellInstance spellInstance)
+    public override void DoEffect(SpellInstance spellInstance, GameField gameField)
     {
         var obj = Script.New();
         if (obj.VariantType != Variant.Type.Object) {

@@ -14,7 +14,7 @@ public partial class SpawnProjectileSpellCastEfect : SpellCastEffect
     [Export] public bool DestroyOnBallCollision = false;
     [Export] public bool DestroyOnWallCollision = false;
 
-    public override void DoEffect(SpellInstance spellInstance)
+    public override void DoEffect(SpellInstance spellInstance, GameField gameField)
     {
         var prefab = Prefab.Instantiate<RigidBody3D>();
         spellInstance.AddChild(prefab);
@@ -25,16 +25,16 @@ public partial class SpawnProjectileSpellCastEfect : SpellCastEffect
         if (DestroyOnBallCollision) prefab.SetCollisionMaskValue(CollisionLayers.Ball, true);
         prefab.BodyEntered += AnyEntered;
 
-        prefab.GlobalPosition = SpawnLocation == SpawnPoint.Circle 
-            ? spellInstance.Caster.SpellCircle.GlobalPosition 
-            : spellInstance.Caster.SpawnPointTurretPosition;
+        prefab.GlobalPosition = SpawnLocation == SpawnPoint.Circle
+            ? gameField.SpellCastSpawns[spellInstance.Caster.GetPlayerIndex()].GlobalPosition
+            : gameField.TurretPositions[spellInstance.Caster.GetPlayerIndex()];
 
         var velocity = prefab.GlobalPosition.DirectionTo(spellInstance.TargetPosition) * Speed;
         if (SpawnLocation == SpawnPoint.Circle)
             velocity.Y = 0;
         prefab.LinearVelocity = velocity;
 
-        var prefabHelper = new SpellSpawnedPrefab(Lifetime);
+        var prefabHelper = new SpellPrefabHelper(Lifetime);
         prefab.AddChild(prefabHelper);
         
         return;
@@ -62,4 +62,11 @@ public partial class SpawnProjectileSpellCastEfect : SpellCastEffect
         Circle,
         Turret
     }
+
+    public Vector3 GetSourcePosition(GameField gameField, GamePlayer caster)
+        => SpawnLocation switch
+        {
+            SpawnPoint.Circle => gameField.SpellCastSpawns[caster.GetPlayerIndex()].GlobalPosition,
+            SpawnPoint.Turret => gameField.TurretPositions[caster.GetPlayerIndex()],
+        };
 }

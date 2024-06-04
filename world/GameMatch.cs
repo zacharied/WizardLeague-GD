@@ -121,7 +121,8 @@ public partial class GameMatch : Node
 
     public GamePlayer GetLocalPlayer()
     {
-        return Players.Single(p => p.ClientId == (uint)Multiplayer.GetUniqueId());
+        // TODO Check here if there's a dumb way to tell that p is local
+        return Players.Single(p => p.IsMultiplayerAuthority());
     }
 
     public enum MatchPlayState

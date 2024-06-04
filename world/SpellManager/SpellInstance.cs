@@ -19,8 +19,8 @@ public partial class SpellInstance : Node3D
     public RigidBody3D Ball { get; private set; } = null!;
     public SpellRecord Record { get; private set; } = null!;
     public GamePlayer Caster { get; private set; }
+    public GameField GameField { get; private set; } = null!;
     public Vector3 TargetPosition { get; private set; }
-    public Vector3 SourcePosition { get; private set; }
 
     private SpellCastEffect Effect = null!;
     
@@ -28,14 +28,20 @@ public partial class SpellInstance : Node3D
     public SpellState State = SpellState.Charging;
     public bool AnimationLock = false;
 
-    public SpellInstance Init(ulong spellId, SpellRecord spellRecord, RigidBody3D ball, GamePlayer caster, Vector3 targetPosition)
+    public SpellInstance Init(
+        ulong spellId,
+        SpellRecord spellRecord,
+        RigidBody3D ball,
+        GamePlayer caster,
+        GameField field,
+        Vector3 targetPosition)
     {
         SpellId = spellId;
         Record = spellRecord;
         Ball = ball;
         Caster = caster;
+        GameField = field;
         TargetPosition = targetPosition;
-        SourcePosition = Caster.SpellCircle.GlobalPosition;
         return this;
     }
 
@@ -54,7 +60,7 @@ public partial class SpellInstance : Node3D
                 EmitSignal(SignalName.SpellChargeFinished);
                 
                 GD.Print($"CAST SPELL {SpellId} \"{Record.Name}\"");
-                Effect.DoEffect(this);
+                Effect.DoEffect(this, GameField);
             }
         }
     }

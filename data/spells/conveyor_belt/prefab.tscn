@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bgya5hf5cgpey"]
 
 [ext_resource type="Texture2D" uid="uid://v4w718e4dg0y" path="res://assets/util/vfx-noises/NoiseLava01.png" id="1_84ic5"]
-[ext_resource type="Script" path="res://world/SpellSpawnedPrefab/SpellSpawnedPrefab.cs" id="1_detui"]
+[ext_resource type="Script" path="res://world/SpellSpawnedPrefab/SpellPrefabHelper.cs" id="1_detui"]
 [ext_resource type="Shader" path="res://data/spells/conveyor_belt/prefab.gdshader" id="2_woe5o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lvcc3"]

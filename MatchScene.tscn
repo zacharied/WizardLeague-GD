@@ -94,25 +94,23 @@ Ball = NodePath("../Ball")
 replication_interval = 0.016
 replication_config = SubResource("SceneReplicationConfig_myu3i")
 
-[node name="NetworkGame" type="Node" parent="." node_paths=PackedStringArray("GameMatch", "Synchronizer", "NetworkSpellManager", "SpellManager")]
+[node name="NetworkGame" type="Node" parent="."]
 script = ExtResource("10_wnbby")
-GameMatch = NodePath("../GameMatch")
-Synchronizer = NodePath("../MultiplayerSynchronizer")
-NetworkSpellManager = NodePath("../NetworkSpellManager")
-SpellManager = NodePath("../SpellManager")
 DefaultPrimarySpell = ExtResource("11_wmcon")
 DefaultSpellDeck = SubResource("Resource_xv13o")
 
-[node name="TargetDisplay" parent="." node_paths=PackedStringArray("GameInput", "GameMatch", "CanvasLayer", "Camera") instance=ExtResource("12_mto5x")]
+[node name="TargetDisplay" parent="." node_paths=PackedStringArray("GameInput", "GameMatch", "GameField", "CanvasLayer", "Camera") instance=ExtResource("12_mto5x")]
 GameInput = NodePath("../Input")
 GameMatch = NodePath("../GameMatch")
+GameField = NodePath("../GameField")
 CanvasLayer = NodePath("../CanvasLayer")
 Camera = NodePath("../Camera3D")
 TransparentMaterial = ExtResource("13_6gi3x")
 
-[node name="IndicatorDisplay" type="Node3D" parent="." node_paths=PackedStringArray("SpellManager") groups=["client_side"]]
+[node name="IndicatorDisplay" type="Node3D" parent="." node_paths=PackedStringArray("SpellManager", "GameField") groups=["client_side"]]
 script = ExtResource("14_w2lk5")
 SpellManager = NodePath("../SpellManager")
+GameField = NodePath("../GameField")
 DefaultIndicator = ExtResource("15_uv631")
 DefaultLine = ExtResource("21_hoohb")
 

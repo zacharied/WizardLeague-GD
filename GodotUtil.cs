@@ -47,6 +47,23 @@ public static class GodotUtil
             child.QueueFree();
         }
     }
+    
+
+    public static void DisableNodesWithGroup(this Node @this, StringName groupName)
+    {
+        @this.GetTree().NodeAdded += (node) =>
+        {
+            if (node.IsInGroup(groupName)) {
+                node.GetParent().RemoveChild(node);
+                node.QueueFree();
+            }
+        };
+
+        foreach (var node in @this.GetTree().GetNodesInGroup(groupName)) {
+            node.GetParent().CallDeferred(Node.MethodName.RemoveChild, node);
+            node.QueueFree();
+        }
+    }
 }
 
 public static class CollisionLayers

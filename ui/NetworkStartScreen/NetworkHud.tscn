@@ -1,0 +1,118 @@
+[gd_scene load_steps=4 format=3 uid="uid://7ra3t2r84sh0"]
+
+[ext_resource type="Script" path="res://ui/NetworkStartScreen/NetworkHud.cs" id="1_6mune"]
+[ext_resource type="Script" path="res://ui/util/LiteTabContainer.cs" id="1_j3vht"]
+
+[sub_resource type="SystemFont" id="SystemFont_vcmc4"]
+font_names = PackedStringArray("Monospace")
+font_weight = 700
+subpixel_positioning = 0
+
+[node name="NetworkHud" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_6mune")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_font_sizes/normal_font_size = 69
+text = "Ultimate Wizard League"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 22
+text = "Client Mode"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ContentTabs" type="MarginContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+script = ExtResource("1_j3vht")
+
+[node name="ConnectPrompt" type="HBoxContainer" parent="VBoxContainer/ContentTabs"]
+clip_contents = true
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 2.0
+
+[node name="ServerAddressEdit" type="LineEdit" parent="VBoxContainer/ContentTabs/ConnectPrompt"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.5
+placeholder_text = "Server IP"
+
+[node name="ConnectToServerButton" type="Button" parent="VBoxContainer/ContentTabs/ConnectPrompt"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Connect"
+
+[node name="Status" type="RichTextLabel" parent="VBoxContainer/ContentTabs"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Connecting..."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ReadyUpPrompt" type="VBoxContainer" parent="VBoxContainer/ContentTabs"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ReadyUpStatus" type="RichTextLabel" parent="VBoxContainer/ContentTabs/ReadyUpPrompt"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Player PLAYER2 has connected.
+Click Ready to proceed."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ReadyUpButton" type="Button" parent="VBoxContainer/ContentTabs/ReadyUpPrompt"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Ready"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/mono_font = SubResource("SystemFont_vcmc4")
+theme_override_font_sizes/mono_font_size = 18
+bbcode_enabled = true
+text = "To host a server, run this executable with the [code]--headless[/code] flag."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

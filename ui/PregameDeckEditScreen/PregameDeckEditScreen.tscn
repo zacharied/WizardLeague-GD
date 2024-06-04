@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://brqpgbycu3g6l"]
+
+[ext_resource type="Texture2D" uid="uid://cbs8mx56fj3d6" path="res://assets/icons/craftpix-icons/Fairy skill icons/37.png" id="1_n8e36"]
+[ext_resource type="Script" path="res://ui/PregameDeckEditScreen/PregameDeckEditScreen.cs" id="1_v5dso"]
+
+[node name="PregameDeckEditScreen" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 15
+script = ExtResource("1_v5dso")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 48
+text = "Select your deck"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Preset 1"
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Preset 2"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="AllSpellsList" type="ItemList" parent="VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/line_separation = 12
+select_mode = 1
+auto_height = true
+item_count = 2
+fixed_icon_size = Vector2i(64, 64)
+item_0/text = "Test Test"
+item_0/icon = ExtResource("1_n8e36")
+item_1/text = "Item 2"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.33
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "→"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemList" type="ItemList" parent="VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+fixed_icon_size = Vector2i(64, 64)

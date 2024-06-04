@@ -5,9 +5,13 @@ using wizardballz.spells;
 namespace wizardballz.world;
 
 /// <summary>
-/// Helper node added to the spell prefab by the spell manager that tracks lifetime, distance, etc.
+/// Helper node added to the spell prefab by the spell manager that handles any "runaway" prefabs that weren't destroyed
+/// by their creator.
+/// <p />
+/// We add it as a child of the prefab because the prefab itself might already have a script, and adding it as a child
+/// allows easy access to position. It also reduces cleanup overhead.
 /// </summary>
-public partial class SpellSpawnedPrefab : Node
+public partial class SpellPrefabHelper : Node
 {
     private float MaxLifetime;
     private float Lifetime = 0;
@@ -15,7 +19,7 @@ public partial class SpellSpawnedPrefab : Node
     private SpellInstance SpellInstance = null!;
     private Node Parent = null!;
 
-    public SpellSpawnedPrefab(float maxLifetime)
+    public SpellPrefabHelper(float maxLifetime)
     {
         MaxLifetime = maxLifetime;
     }
@@ -65,11 +69,7 @@ public partial class SpellSpawnedPrefab : Node
         // This is because if we delete a prefab with a gravity area, sometimes that area gets "stuck" with that gravity.
         GetTree().Connect(
             SceneTree.SignalName.ProcessFrame,
-            Callable.From(() =>
-            {
-                GetParent().RemoveChild(this);
-                QueueFree();
-            }),
+            Callable.From(SpellInstance.FinishEffect),
             flags: (uint)ConnectFlags.OneShot);
     }
 }

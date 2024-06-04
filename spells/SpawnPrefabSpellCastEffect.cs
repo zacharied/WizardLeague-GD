@@ -9,7 +9,7 @@ public partial class SpawnPrefabSpellCastEffect : SpellCastEffect
     [Export] public PackedScene Prefab = null!;
     [Export(PropertyHint.Range, "5,60,0.5")] public float Lifetime = 5;
 
-    public override void DoEffect(SpellInstance spellInstance)
+    public override void DoEffect(SpellInstance spellInstance, GameField gameField)
     {
         var prefabInstance = Prefab.Instantiate<Node3D>();
         if (prefabInstance is ISpellPrefabRoot root) {
@@ -21,7 +21,7 @@ public partial class SpawnPrefabSpellCastEffect : SpellCastEffect
         spellInstance.AddChild(prefabInstance);
         prefabInstance.GlobalPosition = spellInstance.TargetPosition;
 
-        var prefabHelper = new SpellSpawnedPrefab(Lifetime);
+        var prefabHelper = new SpellPrefabHelper(Lifetime);
         prefabInstance.AddChild(prefabHelper);
     }
 }

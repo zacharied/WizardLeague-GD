@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Godot;
 using wizardballz.spells;
 using wizardballz.spells.SpellDeck;
@@ -8,19 +10,32 @@ using wizardballz.world.Network;
 
 namespace wizardballz.world;
 
+/// <summary>
+/// Persistent object that stores network players. Serves as communication point between client and server.
+/// </summary>
 public partial class NetworkGame : Node
 {
-    [Export] private GameMatch GameMatch = null!;
-    [Export] private MultiplayerSynchronizer Synchronizer = null!;
-    [Export] private NetworkSpellManager NetworkSpellManager = null;
-    [Export] private SpellManager SpellManager = null!;
-    
+    [Signal]
+    public delegate void PlayerReadiedEventHandler(ulong id);
+
+    [Signal]
+    public delegate void PlayerAddedEventHandler(ulong id, string name);
+
+    [Signal]
+    public delegate void ReceivedOtherPlayerInfoEventHandler();
+
     [Export] private SpellRecord DefaultPrimarySpell = null!;
     [Export] private SpellDeck DefaultSpellDeck = null!;
 
+    private List<GamePlayerProfile> Players = new();
+    private List<ulong> ReadyPlayers = new();
+
+    public IReadOnlyList<GamePlayerProfile> GetPlayers() => Players.AsReadOnly();
+    public bool AllPlayersReady => Players.Count >= WizardBallz.PlayerCount 
+                                   && Players.All(p => ReadyPlayers.Contains(p.ClientId));
+    
     public override void _Ready()
     {
-        var peer = new ENetMultiplayerPeer();
         var args = OS.GetCmdlineArgs().ToList();
 
         string playerName;
@@ -35,7 +50,7 @@ public partial class NetworkGame : Node
         else {
             playerName = $"Player {GD.RandRange(0, 9999):0000}";
         }
-        
+
         if (DisplayServer.GetName() == "headless") {
             RunServerMode();
         }
@@ -43,39 +58,42 @@ public partial class NetworkGame : Node
             RunClientMode();
         }
 
-        Multiplayer.MultiplayerPeer = peer;
-        
         return;
 
         void RunServerMode()
         {
+            var peer = new ENetMultiplayerPeer();
             peer.CreateServer(13237);
+            Multiplayer.MultiplayerPeer = peer;
+
             GD.Print("Running in server mode.");
 
-            DisableNodesWithGroup("client_side");
+            this.DisableNodesWithGroup("client_side");
 
             Multiplayer.PeerConnected += id =>
             {
                 if (id == 1)
                     return;
+                
                 GD.Print($"Client {id} connected.");
+                
+                // Add existing players to the new client
+                foreach (var player in Players) {
+                    RpcId(id, MethodName.ClientAddPlayer, player.ClientId, player.Name, ReadyPlayers.Contains(player.ClientId));
+                }
+                
+                // Tell existing players about the new client
+                foreach (var player in Players) {
+                    RpcId((uint)player.ClientId, MethodName.ClientAddPlayer, id, playerName, false);
+                }
             };
-        
-
-            GameMatch.Ball.FreezeMode = RigidBody3D.FreezeModeEnum.Static;
-            GameMatch.Ball.Freeze = true;
         }
 
         void RunClientMode()
         {
-            Multiplayer.ConnectedToServer += () => { RpcId(1, MethodName.ServerSetClientPlayerInfo, playerName); };
+            Multiplayer.ConnectedToServer += () => { Rpc(MethodName.ServerSetClientPlayerInfo, playerName); };
 
-            var err = peer.CreateClient("71.178.235.20", 13237);
-            if (err != Error.Ok) {
-                GD.PrintErr($"Unable to connect (error code {err})");
-            }
-
-            DisableNodesWithGroup("server_side");
+            this.DisableNodesWithGroup("server_side");
 
             foreach (var node in GetTree().GetNodesInGroup("client_side_no_process_physics")) {
                 if (node is RigidBody3D rigidBody) {
@@ -89,83 +107,89 @@ public partial class NetworkGame : Node
                 }
             }
         }
-
-        void DisableNodesWithGroup(StringName groupName)
-        {
-            GetTree().NodeAdded += (node) =>
-            {
-                if (node.IsInGroup(groupName)) {
-                    node.GetParent().RemoveChild(node);
-                    node.QueueFree();
-                }
-            };
-
-            foreach (var node in GetTree().GetNodesInGroup(groupName)) {
-                node.GetParent().CallDeferred(Node.MethodName.RemoveChild, node);
-                node.QueueFree();
-            }
-        }
-    }
-
-    private void TellClientsPlayerData()
-    {
-        foreach (var player in GameMatch.Players) {
-            Rpc(MethodName.ClientAddPlayer, player.ClientId, player.PlayerName, new string[] { });
-        }
     }
 
     /// <summary>
-    /// RPC method. Called by the server to copy the player data over to the clients.
+    /// Called by the server to copy existing player data to a new client.
     /// </summary>
-    [Rpc(MultiplayerApi.RpcMode.Authority, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable, CallLocal = false)]
-    private void ClientAddPlayer(ulong clientId, string playerName, string[] deckSpellPaths)
+    [Rpc(TransferMode = MultiplayerPeer.TransferModeEnum.Reliable, CallLocal = false)]
+    private void ClientAddPlayer(ulong clientId, string playerName, bool isReady)
     {
-        if (Multiplayer.IsServer())
-            return;
+        AssertIsClient();
+        AssertLobbyNotFull();
         
-        if (GameMatch.Players.Count() >= WizardBallz.PlayerCount) {
-            throw new InvalidOperationException("already at max players");
-        }
+        Players.Add(new GamePlayerProfile(clientId, playerName));
+        if (isReady)
+            ReadyPlayers.Add(clientId);
 
-        GameMatch.AddChild(CreatePlayer(clientId, playerName));
-
-        if (clientId == (ulong)Multiplayer.GetUniqueId()) {
-            // This is the local player
-        }
+        EmitSignal(SignalName.ReceivedOtherPlayerInfo);
     }
 
-    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+    /// <summary>
+    /// Called by a client with name <b>playerName</b> to inform the server of its player information. Also called
+    /// locally, to add a new GamePlayer node.
+    /// </summary>
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
     private void ServerSetClientPlayerInfo(string playerName)
     {
-        if (!Multiplayer.IsServer())
-            return;
-        
-        if (GameMatch.Players.Count() >= WizardBallz.PlayerCount) {
-            throw new InvalidOperationException("already at max players");
-        }
-        
-        GD.Print($"Adding player [{playerName}]");
-        
-        // On server
-        GameMatch.AddChild(CreatePlayer((uint)Multiplayer.GetRemoteSenderId(), playerName));
+        AssertLobbyNotFull();
+        GD.Print(nameof(ServerSetClientPlayerInfo));
 
-        if (GameMatch.Players.Count() == WizardBallz.PlayerCount) {
-            // All players have joined the game, share player data with clients
-            TellClientsPlayerData();
-            GameMatch.SetState(GameMatch.MatchPlayState.Countdown);
-        }
+        var clientId = (uint)Multiplayer.GetRemoteSenderId();
+        var gamePlayerProfile = new GamePlayerProfile(clientId, playerName);
+        Players.Add(gamePlayerProfile);
+        EmitSignal(SignalName.PlayerAdded, clientId, playerName);
     }
 
-    private Node3D GetSpellCircle()
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+    private void ServerSetClientReady()
     {
-        return GameMatch.Field.SpellCastSpawns[GameMatch.Players.Count()];
+        ReadyPlayers.Add((ulong)Multiplayer.GetRemoteSenderId());
+
+        EmitSignal(SignalName.PlayerReadied, (ulong)Multiplayer.GetRemoteSenderId());
+
+        if (Multiplayer.IsServer() && Players.All(p => ReadyPlayers.Contains(p.ClientId))) {
+//            GD.Print("All players have readied up!");
+        }
     }
 
-    private GamePlayer CreatePlayer(ulong clientId, string playerName)
+    public void ConnectToServer(string address)
     {
-        var indicatorColor = clientId == (ulong)Multiplayer.GetUniqueId() ? Colors.White : Colors.Red;
-        return new GamePlayer(clientId, playerName, (uint)GameMatch.Players.Count(), DefaultPrimarySpell, DefaultSpellDeck, GetSpellCircle(),
-            GameMatch.Field.TurretPositions[GameMatch.Players.Count()], NetworkSpellManager, indicatorColor
-            );
+//        AssertIsClient();
+
+        var peer = new ENetMultiplayerPeer();
+        peer.CreateClient(address, 13237);
+        Multiplayer.MultiplayerPeer = peer;
     }
+
+    public void TellServerClientReady()
+    {
+        AssertIsClient();
+        Rpc(MethodName.ServerSetClientReady);
+    }
+    
+    #region Assertions
+
+    private void AssertIsServer()
+    {
+        if (!Multiplayer.IsServer()) {
+            throw new InvalidOperationException($"function must be called on a server");
+        }
+    }
+
+    private void AssertIsClient()
+    {
+        if (Multiplayer.IsServer()) {
+            throw new InvalidOperationException($"function must be called on a client");
+        }
+    }
+
+    private void AssertLobbyNotFull()
+    {
+        if (Players.Count() >= WizardBallz.PlayerCount) {
+            throw new InvalidOperationException("too many players");
+        }
+    }
+    
+    #endregion
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -27,25 +28,18 @@ public partial class GamePlayer : Node
     public float PrimarySpellCooldown { get; private set; } = 0;
     public float SpellRestockCountdown { get; private set; } = 0;
 
-    private NetworkSpellManager SpellManager;
-    public Node3D SpellCircle;
-    public Vector3 SpawnPointTurretPosition;
-
+    public NetworkSpellManager? SpellManager;
+    
     public GameDeck Deck;
     public Dictionary<SpellSlot, SpellRecord?> SpellSlots = new();
     public Color IndicatorColor;
-    public uint PlayerIndex;
 
-    public GamePlayer(ulong clientId, string playerName, uint playerIndex, SpellRecord primarySpell, SpellDeck deck, Node3D spellCircle, Vector3 turretPosition,NetworkSpellManager spellManager, Color indicatorColor)
+    public GamePlayer(ulong clientId, string playerName, SpellRecord primarySpell, SpellDeck deck, Color indicatorColor)
     {
         ClientId = clientId;
         PlayerName = playerName;
-        PlayerIndex = playerIndex;
         SpellSlots[SpellSlot.Primary] = primarySpell;
-        SpellCircle = spellCircle;
-        SpellManager = spellManager;
         IndicatorColor = indicatorColor;
-        SpawnPointTurretPosition = turretPosition;
         
         SpellRestockCountdown = SpellRestockCountdownDuration;
 
@@ -84,6 +78,11 @@ public partial class GamePlayer : Node
 
     public void CastSpell(Vector3 position, SpellSlot slot)
     {
+        if (SpellManager is null) {
+            GD.PushError("attempt to cast spell without a SpellManager assigned");
+            return;
+        }
+        
         if (slot is SpellSlot.Primary && PrimarySpellCooldown > 0) return;
 
         if (SpellSlots[slot] == null) {
@@ -99,6 +98,16 @@ public partial class GamePlayer : Node
         else {
             PrimarySpellCooldown = PrimarySpellCooldownDuration;
         }
+    }
+
+    /// <remarks>This kinda jank</remarks>
+    public int GetPlayerIndex()
+    {
+        if (GetParent() is not GameMatch) {
+            throw new InvalidOperationException("attempt to get player index outside of a match");
+        }
+        
+        return GetParent().GetChildren().ToList().IndexOf(this);
     }
 
     public enum SpellSlot
