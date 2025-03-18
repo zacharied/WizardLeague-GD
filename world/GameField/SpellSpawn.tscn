@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bh0bmcr8eg6v4"]
 
 [ext_resource type="Texture2D" uid="uid://c7pook3lpilwp" path="res://assets/field/summoning_circle/IndicatorTex_02_Packed_white.png" id="1_i0qas"]
-[ext_resource type="Script" path="res://world/GameField/SpellSpawn.cs" id="1_n2qcn"]
+[ext_resource type="Script" uid="uid://c4obfp15440fw" path="res://world/GameField/SpellSpawn.cs" id="1_n2qcn"]
 
 [node name="SpellSpawn1" type="Marker3D"]
 gizmo_extents = 2.8

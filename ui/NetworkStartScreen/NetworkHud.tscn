@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://7ra3t2r84sh0"]
 
-[ext_resource type="Script" path="res://ui/NetworkStartScreen/NetworkHud.cs" id="1_6mune"]
-[ext_resource type="Script" path="res://ui/util/LiteTabContainer.cs" id="1_j3vht"]
+[ext_resource type="Script" uid="uid://cb4tds23b50wa" path="res://ui/NetworkStartScreen/NetworkHud.cs" id="1_6mune"]
+[ext_resource type="Script" uid="uid://b10mgfwmaol8c" path="res://ui/util/LiteTabContainer.cs" id="1_j3vht"]
 
 [sub_resource type="SystemFont" id="SystemFont_vcmc4"]
 font_names = PackedStringArray("Monospace")

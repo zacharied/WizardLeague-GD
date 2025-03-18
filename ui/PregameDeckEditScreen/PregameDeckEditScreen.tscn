@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://brqpgbycu3g6l"]
 
 [ext_resource type="Texture2D" uid="uid://cbs8mx56fj3d6" path="res://assets/icons/craftpix-icons/Fairy skill icons/37.png" id="1_n8e36"]
-[ext_resource type="Script" path="res://ui/PregameDeckEditScreen/PregameDeckEditScreen.cs" id="1_v5dso"]
+[ext_resource type="Script" uid="uid://b8hdsujy0wmyb" path="res://ui/PregameDeckEditScreen/PregameDeckEditScreen.cs" id="1_v5dso"]
 
 [node name="PregameDeckEditScreen" type="MarginContainer"]
 anchors_preset = 15

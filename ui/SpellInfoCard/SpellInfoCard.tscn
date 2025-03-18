@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://qs33x5isu56p"]
 
-[ext_resource type="Script" path="res://ui/SpellInfoCard/SpellInfoCard.cs" id="1_4l732"]
+[ext_resource type="Script" uid="uid://b4ask6wg5iafu" path="res://ui/SpellInfoCard/SpellInfoCard.cs" id="1_4l732"]
 [ext_resource type="PackedScene" uid="uid://b5owxl2tdw04x" path="res://ui/SpellInfoCard/CardInfoItem.tscn" id="1_icuii"]
 
 [node name="SpellInfoCard" type="MarginContainer"]

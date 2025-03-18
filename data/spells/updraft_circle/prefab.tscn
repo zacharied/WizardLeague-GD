@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dj5nxp7px4uwi"]
 
-[ext_resource type="Script" path="res://world/SpellSpawnedPrefab/SpellPrefabHelper.cs" id="1_8ywjc"]
-[ext_resource type="Shader" path="res://data/spells/updraft_circle/prefab.gdshader" id="1_xhwen"]
+[ext_resource type="Script" uid="uid://5m6ek5mjswe2" path="res://world/SpellSpawnedPrefab/SpellPrefabHelper.cs" id="1_8ywjc"]
+[ext_resource type="Shader" uid="uid://y083ueolh28t" path="res://data/spells/updraft_circle/prefab.gdshader" id="1_xhwen"]
 [ext_resource type="Texture2D" uid="uid://v4w718e4dg0y" path="res://assets/util/vfx-noises/NoiseLava01.png" id="2_y5nkd"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qkqkf"]

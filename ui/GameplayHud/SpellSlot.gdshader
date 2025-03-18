@@ -17,14 +17,14 @@ mat2 tex_rotate(float _angle){
 void fragment() {
 	float fill_angle = radians(fill_ratio * max_angle);
 	vec2 uv = ((UV * 2. - 1.) + offset) * tex_rotate(-radians(start_angle));
-	
+
 	if (reflect_x) {
 		uv *= mat2(vec2(-1., 0.), vec2(0., 1.));
 	}
 	if (reflect_y) {
 		uv *= mat2(vec2(1., 0.), vec2(0., -1.));
 	}
-		
+
 	if ((!invert_fill && atan(uv.x, uv.y) + PI < fill_angle) || (invert_fill && atan(uv.x, uv.y) + PI > fill_angle)) {
 		COLOR = texture(TEXTURE, UV) * texture(fill_texture_overlay, UV);
 	} else {

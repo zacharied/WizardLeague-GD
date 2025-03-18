@@ -11,8 +11,8 @@ collision_layer = 8
 collision_mask = 21
 mass = 4.0
 gravity_scale = 0.0
-max_contacts_reported = 2
 contact_monitor = true
+max_contacts_reported = 2
 
 [node name="Visual" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_ik5kr")

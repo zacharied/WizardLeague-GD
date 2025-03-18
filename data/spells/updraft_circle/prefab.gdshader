@@ -30,7 +30,7 @@ float flow(vec2 p) {
 	float z = 2.;
 	float rz = 0.;
 	vec2 bp = p;
-	
+
 	for(float i = 1.; i < 7.; ++i) {
 		p += localTime() * .6;
 		bp += localTime() * 1.9;
@@ -50,10 +50,10 @@ void fragment() {
 	vec2 fragCoord = UV;
 
 	fragCoord *= 3.;
-	
+
 	float rz = flow(fragCoord);
 	vec3 col = vec3(.8, .2, .01) / rz;
 	col = pow(col, vec3(2.2f));
-	
+
 	ALBEDO = col;
 }

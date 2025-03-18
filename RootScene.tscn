@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://6mnbkxdd3w3t"]
 
-[ext_resource type="Script" path="res://RootScene.cs" id="1_i6rio"]
+[ext_resource type="Script" uid="uid://c6qkaf638xr1u" path="res://RootScene.cs" id="1_i6rio"]
 [ext_resource type="PackedScene" uid="uid://7ra3t2r84sh0" path="res://ui/NetworkStartScreen/NetworkHud.tscn" id="2_t07xy"]
-[ext_resource type="Script" path="res://world/NetworkGame.cs" id="3_qf44r"]
+[ext_resource type="Script" uid="uid://cqneeoo4mnr3y" path="res://world/NetworkGame.cs" id="3_qf44r"]
 
 [node name="RootScene" type="Node" node_paths=PackedStringArray("NetworkGame")]
 script = ExtResource("1_i6rio")

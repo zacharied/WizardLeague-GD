@@ -37,7 +37,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j8ngh"]
 _data = {
-"default": SubResource("Animation_luchi")
+&"default": SubResource("Animation_luchi")
 }
 
 [node name="NudgePrefab" type="Node3D"]
@@ -47,6 +47,6 @@ mesh = SubResource("SphereMesh_pp7g6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_j8ngh")
+&"": SubResource("AnimationLibrary_j8ngh")
 }
 autoplay = "default"

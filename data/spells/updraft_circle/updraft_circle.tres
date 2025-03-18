@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellRecord" load_steps=6 format=3 uid="uid://dkpmb34cka50t"]
 
-[ext_resource type="Script" path="res://spells/SpawnPrefabSpellCastEffect.cs" id="1_1a4wp"]
-[ext_resource type="Script" path="res://spells/SpellRecord.cs" id="1_5w8at"]
+[ext_resource type="Script" uid="uid://bq1crn8j1fev1" path="res://spells/SpawnPrefabSpellCastEffect.cs" id="1_1a4wp"]
+[ext_resource type="Script" uid="uid://dp7oqb8cxfiqq" path="res://spells/SpellRecord.cs" id="1_5w8at"]
 [ext_resource type="PackedScene" uid="uid://dj5nxp7px4uwi" path="res://data/spells/updraft_circle/prefab.tscn" id="1_tm2g0"]
 [ext_resource type="Texture2D" uid="uid://vampao332aw3" path="res://assets/icons/craftpix-icons/RPG Pyromancer skill icons/41.png" id="2_vkmcs"]
 

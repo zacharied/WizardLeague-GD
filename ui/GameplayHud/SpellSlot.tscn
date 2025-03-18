@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dx2hboxk3d67h"]
 
-[ext_resource type="Script" path="res://ui/GameplayHud/SpellSlot.cs" id="1_pse18"]
-[ext_resource type="Shader" path="res://ui/GameplayHud/SpellSlot.gdshader" id="2_ku7nu"]
+[ext_resource type="Script" uid="uid://dck0gyfhta6t8" path="res://ui/GameplayHud/SpellSlot.cs" id="1_pse18"]
+[ext_resource type="Shader" uid="uid://bc5n2mxtahluw" path="res://ui/GameplayHud/SpellSlot.gdshader" id="2_ku7nu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8yj0k"]
 content_margin_left = 4.0

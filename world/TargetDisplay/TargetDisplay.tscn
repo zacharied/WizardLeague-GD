@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwg02wbip3jaj"]
 
-[ext_resource type="Script" path="res://world/TargetDisplay/TargetDisplay.cs" id="1_3ifc3"]
+[ext_resource type="Script" uid="uid://0hir1cseiwbe" path="res://world/TargetDisplay/TargetDisplay.cs" id="1_3ifc3"]
 [ext_resource type="Texture2D" uid="uid://wl6biqt3sgs2" path="res://assets/field/line.png" id="2_mcksx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_kqo2b"]
