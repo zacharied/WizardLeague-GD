@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Godot;
 
 namespace wizardballz.world;
@@ -9,13 +10,13 @@ public partial class GamePlayerProfile : Resource
 {
     [Export] public string Name;
     
-    public ulong ClientId;
+    public long ClientId;
 
     public GamePlayerProfile()
     {
     }
 
-    public GamePlayerProfile(ulong clientId, string name)
+    public GamePlayerProfile(long clientId, string name)
     {
         ClientId = clientId;
         Name = name;

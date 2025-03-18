@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cte86jha5xbeh"]
+
+[ext_resource type="Script" uid="uid://cwtdwes6rivsp" path="res://ui/NetworkStartScreen/NetworkLobbyPlayerCard.cs" id="1_pcixe"]
+
+[node name="NetworkLobbyPlayerCard" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pcixe")
+
+[node name="PlayerNameLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "PlayerName"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="PlayerStateLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ready"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

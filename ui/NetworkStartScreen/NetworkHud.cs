@@ -2,91 +2,47 @@ using Godot;
 using System;
 using System.Linq;
 using wizardballz;
+using wizardballz.ui.NetworkStartScreen;
 using wizardballz.world;
+using wizardballz.world.Network;
 
 public partial class NetworkHud : MarginContainer
 {
-    [Export] private NetworkGame NetworkGame = null!;
-    
-    private NetworkScreenState State = NetworkScreenState.Init;
+    [Export] private NetworkLobbyGame NetworkGame = null!;
     
     private LiteTabContainer ContentTabs = null!;
 	
     public override void _Ready()
     {
         ContentTabs = GetNode<LiteTabContainer>("%ContentTabs");
+
         GetNode<Button>("%ConnectToServerButton").Pressed += () =>
         {
-            State = NetworkScreenState.Connecting;
-            GetNode<RichTextLabel>("%Status").Text = "Connecting...";
-            ContentTabs.SelectChild("Status");
-			
-            var address = "127.0.0.1";
-            NetworkGame.ConnectToServer(address);
+            NetworkGame.ConnectToServer();
         };
 
-        NetworkGame.Multiplayer.ConnectedToServer += UpdateByPlayerCount;
-
-        NetworkGame.Multiplayer.ConnectionFailed += () =>
+        NetworkGame.JoinedLobbyAsClient += () =>
         {
-            State = NetworkScreenState.Init;
-            ContentTabs.SelectChild("ConnectPrompt");
+            ContentTabs.SelectChild("Lobby");
         };
 
+        NetworkGame.ReceivedLobbyPlayerInfoAsClient += id =>
+        {
+            var player = NetworkGame.Players.Single(p => p.GamePlayerProfile.ClientId == id);
+            GetNode<NetworkLobbyPlayerList>("%Lobby/PlayerList").AddPlayerCard(player);
+        };
+
+        /*
+        NetworkGame.Multiplayer.ConnectedToServer += UpdateState;
+        NetworkGame.Multiplayer.ConnectionFailed += UpdateState;
         NetworkGame.Multiplayer.PeerConnected += id =>
         {
             if (id == 1)
                 return;
-
-            UpdateByPlayerCount();
+            UpdateState();
         };
 
-        NetworkGame.Multiplayer.PeerDisconnected += _ =>
-        {
-            State = NetworkScreenState.Init;
-            GetNode<RichTextLabel>("%Status").Text = "Connecting...";
-            ContentTabs.SelectChild("ConnectPrompt");
-        };
-
-        NetworkGame.PlayerAdded += (_, _) =>
-        {
-            GD.Print($"PlayerAdded: {NetworkGame.GetPlayers().Count} players");
-            UpdateByPlayerCount();
-        };
-        
-        NetworkGame.ReceivedOtherPlayerInfo += () =>
-        {
-            GD.Print($"Received other player(s) info");      
-            UpdateByPlayerCount();
-        };
-
-        GetNode<Button>("%ReadyUpButton").Pressed += () =>
-        {
-            NetworkGame.TellServerClientReady();
-            GetNode<RichTextLabel>("%ReadyUpStatus").Text = "You have readied up.";
-        };
-    }
-    
-    private void UpdateByPlayerCount()
-    {
-        GD.Print($"{NetworkGame.GetPlayers().Count} players");
-        if (NetworkGame.GetPlayers().Count == WizardBallz.PlayerCount) {
-            State = NetworkScreenState.OpponentConnected;
-            ContentTabs.SelectChild("ReadyUpPrompt"); 
-        }
-        else {
-            State = NetworkScreenState.WaitingForOpponentConnection;
-            ContentTabs.SelectChild("Status");
-            GetNode<RichTextLabel>("%Status").Text = $"Waiting for players ({NetworkGame.GetPlayers().Count} / {WizardBallz.PlayerCount})";
-        }
-    }
-
-    private enum NetworkScreenState
-    {
-        Init,
-        Connecting,
-        WaitingForOpponentConnection,
-        OpponentConnected,
-        WaitingForOpponentReady
+        NetworkGame.Multiplayer.PeerDisconnected += _ => UpdateState();
+        */
     }
 }

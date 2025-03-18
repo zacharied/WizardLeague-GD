@@ -19,7 +19,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/normal_font_size = 48
-text = "Select your deck"
+text = "Customize ur shit like it's Black Ops 2"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -77,3 +77,16 @@ size_flags_horizontal = 3
 [node name="ItemList" type="ItemList" parent="VBoxContainer/HBoxContainer/MarginContainer2"]
 layout_mode = 2
 fixed_icon_size = Vector2i(64, 64)
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel"
+
+[node name="ConfirmButton" type="Button" parent="VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Confirm"

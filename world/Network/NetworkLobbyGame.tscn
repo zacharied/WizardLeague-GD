@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://blr3tbe4cf0dr"]
+
+[ext_resource type="Script" uid="uid://eulmhp8p1w6c" path="res://world/Network/NetworkLobbyGame.cs" id="1_asn6i"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_776uu"]
+
+[node name="NetworkLobbyGame" type="Node"]
+script = ExtResource("1_asn6i")
+
+[node name="Players" type="Node" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_776uu")

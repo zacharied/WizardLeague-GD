@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://b80x2vartt17s"]
+
+[ext_resource type="Script" uid="uid://d2v710xf663dc" path="res://ui/NetworkStartScreen/NetworkLobbyPlayerList.cs" id="1_kbqtm"]
+
+[node name="NetworkLobbyPlayerList" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kbqtm")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "Lobby"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="PlayerCards" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2

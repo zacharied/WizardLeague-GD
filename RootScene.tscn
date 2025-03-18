@@ -2,17 +2,16 @@
 
 [ext_resource type="Script" uid="uid://c6qkaf638xr1u" path="res://RootScene.cs" id="1_i6rio"]
 [ext_resource type="PackedScene" uid="uid://7ra3t2r84sh0" path="res://ui/NetworkStartScreen/NetworkHud.tscn" id="2_t07xy"]
-[ext_resource type="Script" uid="uid://cqneeoo4mnr3y" path="res://world/NetworkGame.cs" id="3_qf44r"]
+[ext_resource type="PackedScene" uid="uid://blr3tbe4cf0dr" path="res://world/Network/NetworkLobbyGame.tscn" id="3_y8vh0"]
 
 [node name="RootScene" type="Node" node_paths=PackedStringArray("NetworkGame")]
 script = ExtResource("1_i6rio")
-NetworkGame = NodePath("NetworkGame")
+NetworkGame = NodePath("NetworkLobbyGame")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="NetworkHud" parent="CanvasLayer" node_paths=PackedStringArray("NetworkGame") instance=ExtResource("2_t07xy")]
 unique_name_in_owner = true
-NetworkGame = NodePath("../../NetworkGame")
+NetworkGame = NodePath("../../NetworkLobbyGame")
 
-[node name="NetworkGame" type="Node" parent="."]
-script = ExtResource("3_qf44r")
+[node name="NetworkLobbyGame" parent="." instance=ExtResource("3_y8vh0")]
